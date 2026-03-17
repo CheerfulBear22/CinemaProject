@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ namespace CinemaProject
 {
     internal class Screen
     {
+        private string FileName = "Screen"; // this needs to change for each screen but idk how to do that
+        // otherwise each screen file will be called the same thing
         private const int ROW = 10;
         private const int COL = 25;
         // attributes for this class
@@ -33,10 +36,27 @@ namespace CinemaProject
 
         public void SaveScreen()
         {
-            // saving data for screen to file
+            // saving the data to the file for the screen
+            using (StreamWriter sw = new StreamWriter(FileName,false))
+            {
+                Console.WriteLine($"(Room number)| {ROW} x {COL}");
+
+                for (int i = 0; i < ROW; i++)
+                {
+                    // new line at the end of each row
+                    Console.WriteLine();
+
+                    for (int j = 0; j < COL; j++)
+                    {
+                        // character '-' is used for an empty seat and if the seat is booked then it can be 'X'
+                        sw.WriteLine($"{Seats[i, j]}\t");
+                    }
+                }
+
+            }
         }
 
-        public void SetSeat(char[,] newSeats)
+        public void SetSeat()
         {
             // fills the character array of seats
             for (int i = 0; i < ROW; i++)
