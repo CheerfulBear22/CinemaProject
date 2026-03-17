@@ -19,9 +19,27 @@ namespace CinemaProject
 
         public void LoadCinema()
         {
+            //Load films into the film list
+            Films = new List<string>();
+            if (File.Exists("Films.txt"))
+            {
+                using (StreamReader sr = new StreamReader("Films.txt"))
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        AddFilm(line);
+                    }
+                }
+            }
+
             //Loading screens into the screen array
         }
 
+
+        /*
+         * FILM MANAGEMENT
+         */
         public void AddFilm(string film)
         {
             //Adding a film
