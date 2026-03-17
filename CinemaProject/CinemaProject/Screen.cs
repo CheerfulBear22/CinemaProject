@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace CinemaProject
 {
-    internal class Cinema
+    internal class Screen
     {
-        private 
     }
 }
