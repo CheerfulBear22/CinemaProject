@@ -31,17 +31,18 @@ namespace CinemaProject
             {
                 IsManager = false;
             }
+        }
 
-                public int AccessManager()
-                {
-                    if (IsManager == true)
-                    {
-                        return 1;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
-                }
+        public int AccessManager()
+        {
+            if (IsManager == true)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }
