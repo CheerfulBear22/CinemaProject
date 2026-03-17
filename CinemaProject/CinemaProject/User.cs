@@ -17,23 +17,25 @@ namespace CinemaProject
 
         public bool GetIsManager(bool status)
         {
-            IsManager = status
+            IsManager = status;
+            return status;
         }
 
         public string GetUserName(string user)
         {
             UserName = user;
+            return user;
         }
 
         //Functions
 
         public void ChangeIsManager(bool newStatus)
         {
-            if (newStatus == 1)
+            if (newStatus == true)
             {
                 IsManager = true;
             }
-            else if (newStatus == 0)
+            else if (newStatus == false)
             {
                 IsManager = false;
             }
