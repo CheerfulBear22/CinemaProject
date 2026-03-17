@@ -8,6 +8,6 @@ namespace CinemaProject
 {
     internal class Cinema
     {
-        private 
+
     }
 }
