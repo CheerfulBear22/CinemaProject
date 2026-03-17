@@ -8,6 +8,24 @@ namespace CinemaProject
 {
     internal class Cinema
     {
-        private 
+        List<string> Films;
+        List<Screen> Screens;
+
+        public Cinema()
+        {
+            LoadCinema();
+            Films = new List<string>();
+        }
+
+        public void LoadCinema()
+        {
+            //Loading screens into the screen array
+        }
+
+        public void AddFilm(string film)
+        {
+            //Adding a film
+            if (Films.Count == 0) Films.Add(film);
+        }
     }
 }
