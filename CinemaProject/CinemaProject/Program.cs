@@ -11,6 +11,7 @@ namespace CinemaProject
         static void Main(string[] args)
         {
             Console.WriteLine("Tom here");
+            Console.WriteLine("Alex here");
         }
     }
 }
