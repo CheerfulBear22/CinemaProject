@@ -9,8 +9,7 @@ namespace CinemaProject
 {
     internal class Screen
     {
-        private string FileName = "Screen"; // this needs to change for each screen but idk how to do that
-        // otherwise each screen file will be called the same thing
+        private string FileName;
         private const int ROW = 10;
         private const int COL = 25;
         // attributes for this class
@@ -26,6 +25,7 @@ namespace CinemaProject
             Customers = new List<Customer>();
 
             ScreenNumber = sn;
+            FileName = $"Screen{ScreenNumber}.txt";
             NextFilm = nf;
         }
 
