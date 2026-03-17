@@ -68,13 +68,48 @@ namespace CinemaProject
 
         public decimal CalcScreenRevenue()
         {
-            // check for VIP and OAP for each customer in list
-            // increment a counter for the number of each
-            // then have a base price that can be increased (VIP)
+            int VIP = 0;
+            int OAP = 0;
+            int count = 0;
+            // have a base price that can be increased (VIP)
             // or decreased (OAP) in order then count the number of customers in the list
+            decimal basePrice = 20.00m;
+            decimal totalProfit = 0;
+
+            foreach (Customer c in Customers)
+            {
+                // check for VIP and OAP for each customer in list
+                if (c.GetOAP() || c.GetVIP())
+                {
+                    if (c.GetOAP())
+                    {
+                        // increment a counter for the number of each
+                        OAP++;
+                        count++;
+                    }
+                    if (c.GetVIP())
+                    {
+                        VIP++;
+                        count++;
+                    }
+                    if (c.GetVIP() && c.GetOAP())
+                    {
+                        OAP--;
+                        VIP--;
+                        count++;
+                    }
+                }
+            }
+
             // to calculate the revenue
-            // returns a decimal price for the screen
+            decimal VIPtot = VIP * (basePrice * (decimal)1.2);
+            decimal OAPtot = OAP * (basePrice * (decimal)0.8);
+
+            totalProfit = VIPtot + OAPtot;
+
+            // returns a decimal revenue for the screen
             // rounded to 2dp
+            return Math.Round(totalProfit,2);
         }
     }
 }
