@@ -31,7 +31,15 @@ namespace CinemaProject
 
         public void LoadScreen()
         {
-            // loading file for the screen
+            // loading file for the screen with check to see if the file exists
+            if (File.Exists(FileName))
+            {
+                using (StreamReader sr = new StreamReader(FileName))
+                {
+                    // dont know how to do this
+                    // will use ai to help another time
+                }
+            }
         }
 
         public void SaveScreen()
