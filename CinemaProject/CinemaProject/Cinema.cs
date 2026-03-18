@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace CinemaProject
 {
     internal class Cinema
     {
-        List<string> Films;
+        List<string> Films = new List<string>();
         List<Screen> Screens;
 
         public Cinema()
@@ -70,12 +71,12 @@ namespace CinemaProject
             Films.RemoveAt(index);
         }
 
-        static int FindFilm(string film)
-        {
+        private int FindFilm(string film)
+          {
             return _BinarySearch(Films, film, 0, Films.Count);
         }
 
-        static int _BinarySearch(List<string> data, string value, int left, int right)
+        private int _BinarySearch(List<string> data, string value, int left, int right)
         {
             if (left > right)
             {
