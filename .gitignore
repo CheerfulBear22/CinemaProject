@@ -9,6 +9,7 @@
 !*.csproj
 !*.cs
 !*.resx
+!/SaveData
 
 # 3. App Config & Resources
 !*.config
