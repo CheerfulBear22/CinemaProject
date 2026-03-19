@@ -3,16 +3,146 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Numerics;
+using System.IO;
 
 namespace CinemaProject
 {
     internal class Program
     {
+        //User file paths and lists to load into
+        static string baseDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
+        static string MANAGER_FILE = Path.Combine(baseDirectory, "SaveData", "managers.txt");
+        static string USER_FILE = Path.Combine(baseDirectory, "SaveData", "users.txt");
+
+        static User CurrentUser;
+
         static void Main(string[] args)
         {
-            Console.WriteLine("sammy");
-            Console.WriteLine("Tom here");
-            Console.WriteLine("Alex here");
+            if (!Login())
+            {
+                Console.WriteLine("Too many failed login attempts. Exiting...");
+                return;
+            }
+
+            Menu();
+        }
+
+        static void Menu()
+        {
+            Console.Clear();
+            Console.WriteLine("---- WELCOME TO CINEMA MANAGEMENT SYSTEM ----");
+            Console.WriteLine();
+            Console.WriteLine("ENTER YOUR OPTIONS");
+        }
+
+        static bool Login()
+        {
+            bool LoggedIn = false;
+            bool ManagerLogin = false;
+            string loginFile;
+
+            //Loop to ensure that correct input is given for user or manager login
+            bool valid = false;
+            while (!valid)
+            {
+                Console.WriteLine("Log in as user or manager? (u/m)");
+                string userChoice = Console.ReadLine();
+
+                if (userChoice == "u")
+                {
+                    ManagerLogin = false;
+                    valid = true;
+                }
+                else if (userChoice == "m")
+                {
+                    ManagerLogin = true;
+                    valid = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input, please try again.");
+                }
+            }
+
+            loginFile = ManagerLogin ? MANAGER_FILE : USER_FILE; //One liner to decide which file to use
+
+            //Username + password process
+            int count = 0;
+
+            while(!LoggedIn && count < 3)
+            {
+                Console.WriteLine("Enter username:");
+                string username = Console.ReadLine();
+                Console.WriteLine("Enter password:");
+                string password = Console.ReadLine();
+                string hashedPassword = SquareHash(password);
+                if (File.Exists(loginFile))
+                {
+                    using (StreamReader sr = new StreamReader(loginFile))
+                    {
+                        string line;
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            string[] parts = line.Split(',');
+                            if (parts.Length == 2 && parts[0] == username && parts[1] == hashedPassword)
+                            {
+                                LoggedIn = true;
+                                CurrentUser = new User();
+                                CurrentUser.UserName = username;
+                                CurrentUser.IsManager = ManagerLogin;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("login file not found.");
+                }
+                if (!LoggedIn)
+                {
+                    count++;
+                    Console.WriteLine($"Invalid credentials. {3 - count} attempts remaining.");
+                }
+            }
+
+            return LoggedIn;
+        }
+
+        static string SquareHash(string s)
+        {
+            //Secure hashing function
+            byte[] data = Encoding.UTF8.GetBytes(s);
+            byte[] paddedData = new byte[((data.Length + 3) / 4) * 4];
+            Array.Copy(data, paddedData, data.Length);
+
+            BigInteger finalHash = 0;
+
+            for (int i = 0; i < data.Length; i += 4)
+            {
+                BigInteger chunk = new BigInteger(paddedData.Skip(i).Take(4).ToArray());
+
+                finalHash ^= (BigInteger.Pow(chunk, 8) << (i / 4)); //Left shift means there is no cancelling from xor
+            }
+
+            return finalHash.ToString("X64");
+        }
+
+
+        static void AddUser(User newUser)
+        {
+            // probably adds the passed user to a list of users
+            // or saves them to a file
+            // or loads them to a file
+            // for David to do
+        }
+
+        static void Save()
+        {
+            // saves the user credentials to the file if it is a new user
+            // or just not do anything if the user is already saved
+            // this means that Main will not call it if therer are no users to add
         }
     }
 }

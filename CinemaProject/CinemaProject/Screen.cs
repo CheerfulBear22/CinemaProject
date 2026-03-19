@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace CinemaProject
 {
     internal class Screen
     {
+        private string FileName;
         private const int ROW = 10;
         private const int COL = 25;
         // attributes for this class
@@ -23,20 +25,46 @@ namespace CinemaProject
             Customers = new List<Customer>();
 
             ScreenNumber = sn;
+            FileName = $"Screen{ScreenNumber}.txt";
             NextFilm = nf;
         }
 
         public void LoadScreen()
         {
-            // loading file for the screen
+            // loading file for the screen with check to see if the file exists
+            if (File.Exists(FileName))
+            {
+                using (StreamReader sr = new StreamReader(FileName))
+                {
+                    // dont know how to do this
+                    // will use ai to help another time
+                }
+            }
         }
 
         public void SaveScreen()
         {
-            // saving data for screen to file
+            // saving the data to the file for the screen
+            using (StreamWriter sw = new StreamWriter(FileName,false))
+            {
+                Console.WriteLine($"(Room number)| {ROW} x {COL}");
+
+                for (int i = 0; i < ROW; i++)
+                {
+                    // new line at the end of each row
+                    Console.WriteLine();
+
+                    for (int j = 0; j < COL; j++)
+                    {
+                        // character '-' is used for an empty seat and if the seat is booked then it can be 'X'
+                        sw.WriteLine($"{Seats[i, j]}\t");
+                    }
+                }
+
+            }
         }
 
-        public void SetSeat(char[,] newSeats)
+        public void SetSeat()
         {
             // fills the character array of seats
             for (int i = 0; i < ROW; i++)
@@ -68,13 +96,48 @@ namespace CinemaProject
 
         public decimal CalcScreenRevenue()
         {
-            // check for VIP and OAP for each customer in list
-            // increment a counter for the number of each
-            // then have a base price that can be increased (VIP)
+            int VIP = 0;
+            int OAP = 0;
+            int count = 0;
+            // have a base price that can be increased (VIP)
             // or decreased (OAP) in order then count the number of customers in the list
+            decimal basePrice = 20.00m;
+            decimal totalProfit = 0;
+
+            foreach (Customer c in Customers)
+            {
+                // check for VIP and OAP for each customer in list
+                if (c.GetOAP() || c.GetVIP())
+                {
+                    if (c.GetOAP())
+                    {
+                        // increment a counter for the number of each
+                        OAP++;
+                        count++;
+                    }
+                    if (c.GetVIP())
+                    {
+                        VIP++;
+                        count++;
+                    }
+                    if (c.GetVIP() && c.GetOAP())
+                    {
+                        OAP--;
+                        VIP--;
+                        count++;
+                    }
+                }
+            }
+
             // to calculate the revenue
-            // returns a decimal price for the screen
+            decimal VIPtot = VIP * (basePrice * (decimal)1.2);
+            decimal OAPtot = OAP * (basePrice * (decimal)0.8);
+
+            totalProfit = VIPtot + OAPtot;
+
+            // returns a decimal revenue for the screen
             // rounded to 2dp
+            return Math.Round(totalProfit,2);
         }
     }
 }
