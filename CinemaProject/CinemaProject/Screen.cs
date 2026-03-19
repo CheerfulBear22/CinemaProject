@@ -9,6 +9,8 @@ namespace CinemaProject
 {
     internal class Screen
     {
+        // this class is pretty much done
+        // needs to have the loading of the screen done
         private string FileName;
         private const int ROW = 10;
         private const int COL = 25;
@@ -23,7 +25,6 @@ namespace CinemaProject
         {
             // create the Customers list when the screen object is instantiated
             Customers = new List<Customer>();
-
             ScreenNumber = sn;
             FileName = $"Screen{ScreenNumber}.txt";
             NextFilm = nf;

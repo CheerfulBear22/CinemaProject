@@ -8,6 +8,7 @@ namespace CinemaProject
 {
     internal class User
     {
+        // this one looks to be pretty much done also
         //Initialising
 
         public bool IsManager;
@@ -35,8 +36,6 @@ namespace CinemaProject
         {
             UserName = userName;
         }
-
-        //Functions
 
         public void ChangeIsManager(bool newStatus)
         {
