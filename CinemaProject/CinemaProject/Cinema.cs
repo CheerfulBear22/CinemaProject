@@ -11,6 +11,7 @@ namespace CinemaProject
     {
         List<string> Films = new List<string>();
         List<Screen> Screens;
+        private int NumScreens;
 
         public Cinema()
         {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Authentication.ExtendedProtection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,8 +13,8 @@ namespace CinemaProject
         // this class is pretty much done
         // needs to have the loading of the screen done
         private string FileName;
-        private const int ROW = 10;
-        private const int COL = 25;
+        private int ROW = 10;
+        private int COL = 25;
         // attributes for this class
         private char[,] Seats;
         private int ScreenNumber;
@@ -26,7 +27,7 @@ namespace CinemaProject
             // create the Customers list when the screen object is instantiated
             Customers = new List<Customer>();
             ScreenNumber = sn;
-            FileName = $"Screen{ScreenNumber}.txt";
+            FileName = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName, "SaveData", $"screen{ScreenNumber}.txt");
             NextFilm = nf;
         }
 
@@ -37,8 +38,30 @@ namespace CinemaProject
             {
                 using (StreamReader sr = new StreamReader(FileName))
                 {
-                    // dont know how to do this
-                    // will use ai to help another time
+                    ROW = Convert.ToInt32(sr.ReadLine());
+                    COL = Convert.ToInt32(sr.ReadLine());
+
+                    Seats = new char[ROW, COL];
+
+                    for (int i = 0; i < ROW; i++)
+                    {
+                        for (int j = 0; j < COL; j++)
+                        {
+                            Seats[i, j] = (char)sr.Read();
+                        }
+                        sr.ReadLine();
+                    }
+                }
+            }
+            else
+            {
+                Seats = new char[ROW, COL];
+                for (int i = 0; i < ROW; i++)
+                {
+                    for (int j = 0; j < COL; j++)
+                    {
+                        Seats[i, j] = '-';
+                    }
                 }
             }
         }
@@ -48,17 +71,17 @@ namespace CinemaProject
             // saving the data to the file for the screen
             using (StreamWriter sw = new StreamWriter(FileName,false))
             {
-                Console.WriteLine($"(Room number)| {ROW} x {COL}");
+                sw.Write($"{ROW}\n{COL}");
 
                 for (int i = 0; i < ROW; i++)
                 {
                     // new line at the end of each row
-                    Console.WriteLine();
+                    sw.WriteLine();
 
                     for (int j = 0; j < COL; j++)
                     {
                         // character '-' is used for an empty seat and if the seat is booked then it can be 'X'
-                        sw.WriteLine($"{Seats[i, j]}\t");
+                        sw.Write($"{Seats[i, j]}");
                     }
                 }
 
