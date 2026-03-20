@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace CinemaProject
 {
@@ -100,6 +101,14 @@ namespace CinemaProject
             {
                 return mid;
             }
+        }
+        public decimal CalculateAllProfit(decimal profit)
+        {
+            foreach(var screen in Screens)
+            {
+                profit += screen.CalcScreenRevenue();
+            }
+            return profit;
         }
     }
 }
