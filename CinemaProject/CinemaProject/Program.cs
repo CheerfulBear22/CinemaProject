@@ -33,7 +33,8 @@ namespace CinemaProject
             Console.Clear();
             Console.WriteLine("---- WELCOME TO CINEMA MANAGEMENT SYSTEM ----");
             Console.WriteLine();
-            Console.WriteLine("ENTER YOUR OPTIONS");
+            Console.WriteLine("ENTER YOUR OPTIONS:");
+
         }
 
         static bool Login()
@@ -136,6 +137,34 @@ namespace CinemaProject
             // or saves them to a file
             // or loads them to a file
             // for David to do
+
+            Console.Write("Enter the username: ");
+            string userName = Console.ReadLine();
+            Console.Write("Enter the password: ");
+            string input1 = Console.ReadLine();
+            Console.Write("Confirm password: ");
+            string input2 = Console.ReadLine();
+
+            string password;
+
+            if (input1 == input2)
+            {
+                password = input2;
+            }
+            else
+            {
+                Console.WriteLine("Password in-valid");
+                Console.WriteLine("Enter...");
+                Console.ReadLine();
+                return;
+            }
+
+            string hashPass = SquareHash(password);
+
+            using (StreamWriter sr = new StreamWriter(USER_FILE, true))
+            {
+                sr.WriteLine($"{userName},{hashPass}");
+            }
         }
 
         static void Save()
