@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
 using System.IO;
+using System.Diagnostics.Eventing.Reader;
 
 namespace CinemaProject
 {
@@ -30,10 +31,20 @@ namespace CinemaProject
 
         static void Menu()
         {
+            // need to edit this and decide what the manager and employees see and how to differentiate between the two
+            // hopefully all the functions of the system should be here in the menu now
+            // not all of them may be needed - some could be implemented as part of each other
             Console.Clear();
             Console.WriteLine("---- WELCOME TO CINEMA MANAGEMENT SYSTEM ----");
             Console.WriteLine();
             Console.WriteLine("ENTER YOUR OPTIONS");
+            Console.WriteLine("1| Book Customer"); // this is definitely for employees
+            Console.WriteLine("2| Seating Availability"); // the function for this needs to ask for the screen that is required
+            Console.WriteLine("3| Calculate Revenue per Screen"); // the function for this needs to ask for the screen that is required
+            Console.WriteLine("4| Calculate Total Revenue"); // needs to collate at the total revenue for all screens
+            Console.WriteLine("5| Edit Film Schedule"); // managers
+            Console.WriteLine("6| Save Everything");
+            Console.WriteLine("7| Exit");
         }
 
         static bool Login()

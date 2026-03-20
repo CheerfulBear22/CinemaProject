@@ -14,6 +14,7 @@ namespace CinemaProject
 
         public Cinema()
         {
+            // immediately loads the cinema from file when the cinema object is instantiated
             LoadCinema();
             Films = new List<string>();
         }
@@ -43,7 +44,7 @@ namespace CinemaProject
          */
         public void AddFilm(string film)
         {
-            //Adding a film
+            //Adding a film to the list in alphabetical order
             if (Films.Count == 0)
             {
                 Films.Add(film);
@@ -72,7 +73,8 @@ namespace CinemaProject
         }
 
         private int FindFilm(string film)
-          {
+        {
+            // calls a binary search function to find the index of the film in the list
             return _BinarySearch(Films, film, 0, Films.Count);
         }
 
@@ -85,6 +87,7 @@ namespace CinemaProject
 
             int mid = (left + right) / 2;
 
+            // binary search to find the index of the film in the list
             if (data[mid].CompareTo(value) < 0)
             {
                 return _BinarySearch(data, value, mid + 1, right);
