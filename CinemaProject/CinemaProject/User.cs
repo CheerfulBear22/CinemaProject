@@ -9,22 +9,18 @@ namespace CinemaProject
     internal class User
     {
         //Initialising
-
         public bool IsManager;
         public string UserName;
-        
-        //Getters
 
+        //Getters
         public bool GetIsManager()
         {
             return IsManager;
         }
-
         public string GetUserName()
         {
             return UserName;
         }
-
         //Setters
         public void SetIsManager(bool isManager)
         {
@@ -35,9 +31,7 @@ namespace CinemaProject
         {
             UserName = userName;
         }
-
         //Functions
-
         public void ChangeIsManager(bool newStatus)
         {
             if (newStatus == true)
@@ -49,7 +43,6 @@ namespace CinemaProject
                 IsManager = false;
             }
         }
-
         public int AccessManager()
         {
             if (IsManager == true)
