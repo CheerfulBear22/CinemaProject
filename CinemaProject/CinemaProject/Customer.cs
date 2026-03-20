@@ -8,6 +8,8 @@ namespace CinemaProject
 {
     internal class Customer
     {
+        // this class is pretty much done
+
         //Attributes
         private int Seat;
         private string Name;
@@ -41,18 +43,20 @@ namespace CinemaProject
         {
             return Seat;
         }
+
         public string GetName()
         {
             return Name;
         }
+
         public bool GetVIP()
         {
             return VIP;
         }
+
         public bool GetOAP()
         {
             return OAP;
         }
-        
     }
 }
