@@ -34,17 +34,45 @@ namespace CinemaProject
             // need to edit this and decide what the manager and employees see and how to differentiate between the two
             // hopefully all the functions of the system should be here in the menu now
             // not all of them may be needed - some could be implemented as part of each other
-            Console.Clear();
-            Console.WriteLine("---- WELCOME TO CINEMA MANAGEMENT SYSTEM ----");
-            Console.WriteLine();
-            Console.WriteLine("ENTER YOUR OPTIONS");
-            Console.WriteLine("1| Book Customer"); // this is definitely for employees
-            Console.WriteLine("2| Seating Availability"); // the function for this needs to ask for the screen that is required
-            Console.WriteLine("3| Calculate Revenue per Screen"); // the function for this needs to ask for the screen that is required
-            Console.WriteLine("4| Calculate Total Revenue"); // needs to collate at the total revenue for all screens
-            Console.WriteLine("5| Edit Film Schedule"); // managers
-            Console.WriteLine("6| Save Everything");
-            Console.WriteLine("7| Exit");
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("---- WELCOME TO CINEMA MANAGEMENT SYSTEM ----");
+                Console.WriteLine();
+                Console.WriteLine("ENTER YOUR OPTIONS:");
+                Console.WriteLine("1| Book Customer"); // this is definitely for employees
+                Console.WriteLine("2| Seating Availability"); // the function for this needs to ask for the screen that is required
+                Console.WriteLine("3| Calculate Revenue per Screen"); // the function for this needs to ask for the screen that is required
+                Console.WriteLine("4| Save Everything");
+                Console.WriteLine("X| Exit");
+
+                if (CurrentUser.GetIsManager())
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("MANAGER'S OPTIONS:");
+                    Console.WriteLine("+| Calculate Total Revenue"); // needs to collate at the total revenue for all screens
+                    Console.WriteLine("#| Edit Film Schedule"); // managers
+                }
+                string choice = Console.ReadLine();
+                if (choice == null)
+                {
+                    Console.WriteLine("Input cannot be null.");
+                    return;
+                }
+
+                switch(choice)
+                {
+                    case "1": break; // book customer
+                    case "2": break; // seating availability
+                    case "3": break; // calculate revenue per screen
+                    case "4": break; // save everything
+                    case "X": Environment.Exit(0); break; // exit
+                    case "+": break; // calculate total revenue
+                    case "#": break; // edit film schedule
+                    default: break;
+                }
+
+            }
         }
 
         static bool Login()

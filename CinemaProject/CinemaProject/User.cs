@@ -9,9 +9,10 @@ namespace CinemaProject
     internal class User
     {
         // this one looks to be pretty much done also
+
         //Initialising
-        public bool IsManager;
-        public string UserName;
+        private bool IsManager;
+        private string UserName;
 
         //Getters
         public bool GetIsManager()
