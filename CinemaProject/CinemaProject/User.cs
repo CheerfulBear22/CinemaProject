@@ -31,6 +31,7 @@ namespace CinemaProject
         public void SetUserName(string userName)
         {
             UserName = userName;
+        }
         //Functions
         public void ChangeIsManager(bool newStatus)
         {
