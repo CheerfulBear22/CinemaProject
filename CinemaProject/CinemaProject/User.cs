@@ -9,23 +9,20 @@ namespace CinemaProject
     internal class User
     {
         // this one looks to be pretty much done also
+
         //Initialising
+        private bool IsManager;
+        private string UserName;
 
-        public bool IsManager;
-        public string UserName;
-        
         //Getters
-
         public bool GetIsManager()
         {
             return IsManager;
         }
-
         public string GetUserName()
         {
             return UserName;
         }
-
         //Setters
         public void SetIsManager(bool isManager)
         {
@@ -36,7 +33,7 @@ namespace CinemaProject
         {
             UserName = userName;
         }
-
+        //Functions
         public void ChangeIsManager(bool newStatus)
         {
             if (newStatus == true)
@@ -48,7 +45,6 @@ namespace CinemaProject
                 IsManager = false;
             }
         }
-
         public int AccessManager()
         {
             if (IsManager == true)
