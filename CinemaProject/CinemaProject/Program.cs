@@ -128,8 +128,8 @@ namespace CinemaProject
                             {
                                 LoggedIn = true;
                                 CurrentUser = new User();
-                                CurrentUser.UserName = username;
-                                CurrentUser.IsManager = ManagerLogin;
+                                CurrentUser.SetUserName(username);
+                                CurrentUser.SetIsManager(ManagerLogin);
                                 break;
                             }
                         }
