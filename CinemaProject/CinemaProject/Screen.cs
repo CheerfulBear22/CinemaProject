@@ -13,6 +13,7 @@ namespace CinemaProject
         // this class is pretty much done
         // needs to have the loading of the screen done
         private string FileName;
+        private string CustomerFileName;
         private int ROW = 10;
         private int COL = 25;
         // attributes for this class
@@ -20,6 +21,7 @@ namespace CinemaProject
         private int ScreenNumber;
         private string NextFilm;
         private List<Customer> Customers;
+        private List<string> CustomerNames; //Can then search this to get the index in the main list
 
         // constuctor
         public Screen(int sn)
@@ -28,6 +30,7 @@ namespace CinemaProject
             Customers = new List<Customer>();
             ScreenNumber = sn;
             FileName = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName, "SaveData", $"screen{ScreenNumber}.txt");
+            CustomerFileName = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName, "SaveData", $"screen{ScreenNumber}Customers.txt");
         }
 
         public void LoadScreen()
@@ -64,6 +67,22 @@ namespace CinemaProject
                     }
                 }
             }
+
+            if (File.Exists(CustomerFileName))
+            {
+                using (StreamReader sr = new StreamReader(CustomerFileName))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        Customer c = new Customer();
+                        string[] line = sr.ReadLine().Split(',');
+                        c.SetName(line[0]);
+                        c.SetSeat(Convert.ToInt32(line[1]));
+                        c.SetOAP(line[2] == "true");
+                        c.SetVIP(line[3] == "true");
+                    }
+                }
+            }
         }
 
         public void SaveScreen()
@@ -85,6 +104,17 @@ namespace CinemaProject
                     }
                 }
 
+            }
+
+            using (StreamWriter sw = new StreamWriter(CustomerFileName, false))
+            {
+                foreach (Customer c in Customers)
+                {
+                    sw.WriteLine(c.GetName());
+                    sw.WriteLine(c.GetSeat());
+                    sw.WriteLine(c.GetOAP());
+                    sw.WriteLine(c.GetVIP());
+                }
             }
         }
 
