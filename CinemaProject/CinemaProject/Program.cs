@@ -17,6 +17,7 @@ namespace CinemaProject
         static string USER_FILE = Path.Combine(baseDirectory, "SaveData", "users.txt");
 
         static User CurrentUser;
+        static Cinema CurrentCinema;
 
         static void Main(string[] args)
         {
@@ -25,6 +26,8 @@ namespace CinemaProject
                 Console.WriteLine("Too many failed login attempts. Exiting...");
                 return;
             }
+
+            CurrentCinema = new Cinema();
 
             Menu();
         }
@@ -207,9 +210,7 @@ namespace CinemaProject
 
         static void Save()
         {
-            // saves the user credentials to the file if it is a new user
-            // or just not do anything if the user is already saved
-            // this means that Main will not call it if therer are no users to add
+            //CurrentCinema.SaveCinema();
         }
     }
 }

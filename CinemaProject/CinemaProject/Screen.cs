@@ -22,13 +22,12 @@ namespace CinemaProject
         private List<Customer> Customers;
 
         // constuctor
-        public Screen(int sn, string nf)
+        public Screen(int sn)
         {
             // create the Customers list when the screen object is instantiated
             Customers = new List<Customer>();
             ScreenNumber = sn;
             FileName = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName, "SaveData", $"screen{ScreenNumber}.txt");
-            NextFilm = nf;
         }
 
         public void LoadScreen()
@@ -38,6 +37,7 @@ namespace CinemaProject
             {
                 using (StreamReader sr = new StreamReader(FileName))
                 {
+                    NextFilm = sr.ReadLine();
                     ROW = Convert.ToInt32(sr.ReadLine());
                     COL = Convert.ToInt32(sr.ReadLine());
 
@@ -71,7 +71,7 @@ namespace CinemaProject
             // saving the data to the file for the screen
             using (StreamWriter sw = new StreamWriter(FileName,false))
             {
-                sw.Write($"{ROW}\n{COL}");
+                sw.Write($"{NextFilm}\n{ROW}\n{COL}");
 
                 for (int i = 0; i < ROW; i++)
                 {

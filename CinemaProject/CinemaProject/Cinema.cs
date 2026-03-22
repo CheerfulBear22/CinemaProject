@@ -12,7 +12,8 @@ namespace CinemaProject
     {
         List<string> Films = new List<string>();
         List<Screen> Screens;
-        private int NumScreens;
+        private string FilmsFilePath = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName, "SaveData", "Films.txt");
+        private int NumScreens = 5;
 
         public Cinema()
         {
@@ -25,9 +26,9 @@ namespace CinemaProject
         {
             //Load films into the film list
             Films = new List<string>();
-            if (File.Exists("Films.txt"))
+            if (File.Exists(FilmsFilePath))
             {
-                using (StreamReader sr = new StreamReader("Films.txt"))
+                using (StreamReader sr = new StreamReader(FilmsFilePath))
                 {
                     string line;
                     while ((line = sr.ReadLine()) != null)
@@ -38,6 +39,12 @@ namespace CinemaProject
             }
 
             //Loading screens into the screen array
+
+            for (int i = 0; i < NumScreens; i++)
+            {
+                Screens.Add(new Screen(i + 1));
+                Screens[i].LoadScreen();
+            }
         }
 
 
