@@ -80,6 +80,7 @@ namespace CinemaProject
                         c.SetSeat(Convert.ToInt32(line[1]));
                         c.SetOAP(line[2] == "true");
                         c.SetVIP(line[3] == "true");
+                        CustomerNames.Add(line[0]);
                     }
                 }
             }
@@ -192,6 +193,15 @@ namespace CinemaProject
             // returns a decimal revenue for the screen
             // rounded to 2dp
             return Math.Round(totalProfit,2);
+        }
+
+        public void AddCustomer(string name, int seat, bool OAP, bool VIP)
+        {
+            Customer c = new Customer();
+            c.SetName(name);
+            c.SetSeat(seat);
+            c.SetVIP(VIP);
+            c.SetOAP(OAP);
         }
     }
 }
