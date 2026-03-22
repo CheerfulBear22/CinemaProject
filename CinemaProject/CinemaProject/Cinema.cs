@@ -47,6 +47,22 @@ namespace CinemaProject
             }
         }
 
+        public void SaveCinema()
+        {
+            foreach (Screen screen in Screens)
+            {
+                screen.SaveScreen();
+            }
+
+            using (StreamWriter sr = new StreamWriter(FilmsFilePath, false))
+            {
+                foreach (string f in Films)
+                {
+                    sr.WriteLine(f);
+                }
+            }
+        }
+
 
         /*
          * FILM MANAGEMENT

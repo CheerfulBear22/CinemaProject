@@ -210,7 +210,8 @@ namespace CinemaProject
 
         static void Save()
         {
-            //CurrentCinema.SaveCinema();
+            CurrentCinema.SaveCinema();
+            //No need to save users as it already does when adding a new one
         }
     }
 }
