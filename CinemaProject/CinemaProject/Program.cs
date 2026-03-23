@@ -65,14 +65,44 @@ namespace CinemaProject
 
                 switch(choice)
                 {
+                    case "+": // calculate total revenue
+                        if (CurrentUser.GetIsManager())
+                        {
+                            Console.WriteLine($"Current total profit is {CurrentCinema.CalculateAllProfit()}");
+                        }
+                        else Console.WriteLine("Invalid input");
+                        break;
+                    case "#":// edit film schedule
+                        if (CurrentUser.GetIsManager())
+                        {
+                            Console.WriteLine("Add or remove a film? (a/r)");
+                            switch (Console.ReadLine())
+                            {
+                                case "a":
+                                    Console.WriteLine("Enter film name: ");
+                                    CurrentCinema.AddFilm(Console.ReadLine());
+                                    break;
+                                case "r":
+                                    Console.WriteLine("Enter film name: ");
+                                    if (CurrentCinema.RemoveFilm(Console.ReadLine()))
+                                    {
+                                        Console.WriteLine("Film removed");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Error: Film not found");
+                                    }
+                                    break;
+                            }
+                        }
+                        else Console.WriteLine("Invalid input");
+                        break;
                     case "1": break; // book customer
                     case "2": break; // seating availability
                     case "3": break; // calculate revenue per screen
                     case "4": break; // save everything
                     case "X": Environment.Exit(0); break; // exit
-                    case "+": break; // calculate total revenue
-                    case "#": break; // edit film schedule
-                    default: break;
+                    default: Console.WriteLine("Invalid input"); break;
                 }
 
             }

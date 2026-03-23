@@ -87,14 +87,15 @@ namespace CinemaProject
             Films.Add(film);
         }
 
-        public void RemoveFilm(string film)
+        public bool RemoveFilm(string film) //bool so the menu knows if the function worked
         {
             //Remove a film from the list using the FindFilm function
             int index = FindFilm(film);
 
-            if (index == -1) return;
+            if (index == -1) return false;
 
             Films.RemoveAt(index);
+            return true;
         }
 
         private int FindFilm(string film)
@@ -126,8 +127,9 @@ namespace CinemaProject
                 return mid;
             }
         }
-        public decimal CalculateAllProfit(decimal profit)
+        public decimal CalculateAllProfit()
         {
+            decimal profit = 0;
             foreach(var screen in Screens)
             {
                 profit += screen.CalcScreenRevenue();
