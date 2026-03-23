@@ -137,6 +137,11 @@ namespace CinemaProject
             return profit;
         }
 
+        public decimal CalculateScreenProfit(int screen)
+        {
+            return Screens[screen-1].CalcScreenRevenue();
+        }
+
         public void AddCustomer(int screen, string name, int seat, bool OAP, bool VIP)
         {
             Screens[screen].AddCustomer(name, seat, OAP, VIP);

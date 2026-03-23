@@ -99,8 +99,18 @@ namespace CinemaProject
                         break;
                     case "1": break; // book customer
                     case "2": break; // seating availability
-                    case "3": break; // calculate revenue per screen
-                    case "4": break; // save everything
+                    case "3":
+                        Console.WriteLine("Enter screen number:");
+                        try
+                        {
+                            int screenNum = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine($"The total revenue for screen number {screenNum} is £{CurrentCinema.CalculateScreenProfit(screenNum)}");
+                        } catch
+                        {
+                            Console.WriteLine("Invalid input");
+                        }
+                        break; // calculate revenue per screen
+                    case "4": CurrentCinema.SaveCinema(); break; // save everything
                     case "X": Environment.Exit(0); break; // exit
                     default: Console.WriteLine("Invalid input"); break;
                 }
