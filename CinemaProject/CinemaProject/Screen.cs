@@ -111,10 +111,7 @@ namespace CinemaProject
             {
                 foreach (Customer c in Customers)
                 {
-                    sw.WriteLine(c.GetName());
-                    sw.WriteLine(c.GetSeat());
-                    sw.WriteLine(c.GetOAP());
-                    sw.WriteLine(c.GetVIP());
+                    sw.WriteLine($"{c.GetName()},{c.GetSeat()},{c.GetOAP()},{c.GetVIP()}");
                 }
             }
         }
