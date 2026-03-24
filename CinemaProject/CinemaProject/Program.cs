@@ -105,6 +105,10 @@ namespace CinemaProject
                             int screen = Convert.ToInt32(Console.ReadLine());
                             CurrentCinema.DisplayScreen(screen);
                         }
+                        catch
+                        {
+                            Console.WriteLine("Error - Invalid input");
+                        }
                         break;
                     case "3":
                         Console.WriteLine("Enter screen number:");
