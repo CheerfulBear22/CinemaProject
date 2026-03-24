@@ -12,6 +12,7 @@ namespace CinemaProject
     {
         List<string> Films = new List<string>();
         List<Screen> Screens;
+        List<Customer> Customers;
         private string FilmsFilePath = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName, "SaveData", "Films.txt");
         private int NumScreens = 5;
 
@@ -20,6 +21,7 @@ namespace CinemaProject
             // immediately loads the cinema from file when the cinema object is instantiated
             LoadCinema();
             Films = new List<string>();
+            Customers = new List<Customer>();
         }
 
         public void LoadCinema()
@@ -63,10 +65,19 @@ namespace CinemaProject
             }
         }
 
+        public void GetCustomers()
+        {
+            foreach (Screen screen in Screens)
+            {
+                Customers.Add(screen.GetCustomers());
+            }
+        }
+        
 
         /*
          * FILM MANAGEMENT
          */
+
         public void AddFilm(string film)
         {
             //Adding a film to the list in alphabetical order
@@ -127,6 +138,7 @@ namespace CinemaProject
                 return mid;
             }
         }
+
         public decimal CalculateAllProfit()
         {
             decimal profit = 0;

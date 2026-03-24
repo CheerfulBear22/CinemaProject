@@ -45,8 +45,9 @@ namespace CinemaProject
                 Console.WriteLine("ENTER YOUR OPTIONS:");
                 Console.WriteLine("1| Book Customer"); // this is definitely for employees
                 Console.WriteLine("2| Seating Availability"); // the function for this needs to ask for the screen that is required
-                Console.WriteLine("3| Calculate Revenue per Screen"); // the function for this needs to ask for the screen that is required
-                Console.WriteLine("4| Save Everything");
+                Console.WriteLine("3| View Current Customers"); // needs to be done //////////////////////////////////////////////////////////////////////////////////////////////////////
+                Console.WriteLine("4| Calculate Revenue per Screen"); // the function for this needs to ask for the screen that is required
+                Console.WriteLine("5| Save Everything");
                 if (CurrentUser.GetIsManager())
                 {
                     Console.WriteLine();
@@ -54,7 +55,6 @@ namespace CinemaProject
                     Console.WriteLine("+| Calculate Total Revenue"); // needs to collate at the total revenue for all screens
                     Console.WriteLine("#| Edit Film Schedule"); // managers
                     Console.WriteLine("@| Add User");
-
                 }
                 Console.WriteLine("X| Exit");
                 Console.Write("Choice: ");
@@ -241,6 +241,10 @@ namespace CinemaProject
                         break; // seating availability
 
                     case "3":
+
+                        break; // view customers that are currently booked
+
+                    case "4":
                         Console.WriteLine("Enter screen number:");
                         try
                         {
@@ -253,7 +257,7 @@ namespace CinemaProject
                         }
                         break; // calculate revenue per screen
 
-                    case "4":
+                    case "5":
                         Save();
                         break; // save everything
 

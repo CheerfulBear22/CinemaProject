@@ -228,5 +228,10 @@ namespace CinemaProject
                 Console.WriteLine();
             }
         }
+
+        public List<Customer> GetCustomers()
+        {
+            return Customers;
+        }
     }
 }
