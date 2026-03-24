@@ -70,15 +70,15 @@ namespace CinemaProject
 
                 switch(choice)
                 {
-                    case "+": // calculate total revenue
+                    case "+":
                         if (CurrentUser.GetIsManager())
                         {
                             Console.WriteLine($"Current total profit is {CurrentCinema.CalculateAllProfit()}");
                         }
                         else Console.WriteLine("Invalid input");
-                        break;
+                        break; // calculate total revenue
 
-                    case "#":// edit film schedule
+                    case "#":
                         if (CurrentUser.GetIsManager())
                         {
                             Console.WriteLine("Add or remove a film? (a/r)");
@@ -102,7 +102,7 @@ namespace CinemaProject
                             }
                         }
                         else Console.WriteLine("Invalid input");
-                        break;
+                        break; // edit film schedule
 
                     case "1":
                         // clears the console so it looks neater before the inputs
@@ -242,11 +242,17 @@ namespace CinemaProject
                         }
                         break; // calculate revenue per screen
 
-                    case "4": CurrentCinema.SaveCinema(); break; // save everything
+                    case "4":
+                        CurrentCinema.SaveCinema();
+                        break; // save everything
 
-                    case "X": Environment.Exit(0); break; // exit
+                    case "X": 
+                        Environment.Exit(0); 
+                        break; // exit
 
-                    default: Console.WriteLine("Invalid input"); break;
+                    default: 
+                        Console.WriteLine("Invalid input");
+                        break; // default error catch
                 }
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
