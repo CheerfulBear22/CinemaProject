@@ -47,8 +47,6 @@ namespace CinemaProject
                 Console.WriteLine("2| Seating Availability"); // the function for this needs to ask for the screen that is required
                 Console.WriteLine("3| Calculate Revenue per Screen"); // the function for this needs to ask for the screen that is required
                 Console.WriteLine("4| Save Everything");
-                Console.WriteLine("X| Exit");
-
                 if (CurrentUser.GetIsManager())
                 {
                     Console.WriteLine();
@@ -56,11 +54,18 @@ namespace CinemaProject
                     Console.WriteLine("+| Calculate Total Revenue"); // needs to collate at the total revenue for all screens
                     Console.WriteLine("#| Edit Film Schedule"); // managers
                 }
+                Console.WriteLine("X| Exit");
+                Console.Write("Choice: ");
+
                 string choice = Console.ReadLine();
                 if (choice == null)
                 {
                     Console.WriteLine("Input cannot be null.");
                     return;
+                }
+                if (choice == "x")
+                {
+                    choice = "X";
                 }
 
                 switch(choice)
