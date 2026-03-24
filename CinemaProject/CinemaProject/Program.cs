@@ -241,6 +241,7 @@ namespace CinemaProject
                         break; // seating availability
 
                     case "3":
+                        Console.Clear();
                         List<Customer> currentCustomers = CurrentCinema.GetCustomers();
 
                         foreach (Customer c in currentCustomers)
@@ -267,6 +268,8 @@ namespace CinemaProject
 
                             Console.WriteLine($"Name: {c.GetName()} | Seat: {c.GetSeat()} | OAP: {OAP} | VIP: {VIP}");
                         }
+                        Console.WriteLine("Press any key to exit...");
+                        Console.ReadKey();
                         break; // view customers that are currently booked
 
                     case "4":
