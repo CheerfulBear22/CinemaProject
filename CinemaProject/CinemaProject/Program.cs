@@ -112,7 +112,7 @@ namespace CinemaProject
                         {
                             Console.Write("Enter the screen number: ");
                             string input = Console.ReadLine();
-                            if (input != null || !int.TryParse(input, out screen))
+                            if (input == null || !int.TryParse(input, out screen))
                             {
                                 Console.WriteLine("Enter a valid integer.");
                                 return;
@@ -141,7 +141,7 @@ namespace CinemaProject
                         {
                             Console.Write("Enter the seat number: ");
                             string input = Console.ReadLine();
-                            if (input != null || !int.TryParse(input, out seat))
+                            if (input == null || !int.TryParse(input, out seat))
                             {
                                 Console.WriteLine("Enter a valid integer.");
                                 return;
@@ -161,7 +161,7 @@ namespace CinemaProject
                                 Console.WriteLine("Input cannot be null.");
                                 return;
                             }
-                            if (input != "y" || input != "n")
+                            if (input != "y" && input != "n")
                             {
                                 Console.WriteLine("Input invalid - enter Y or N");
                                 return;
@@ -189,7 +189,7 @@ namespace CinemaProject
                                 Console.WriteLine("Input cannot be null.");
                                 return;
                             }
-                            if (input != "y" || input != "n")
+                            if (input != "y" && input != "n")
                             {
                                 Console.WriteLine("Input invalid - enter Y or N");
                                 return;
