@@ -98,7 +98,14 @@ namespace CinemaProject
                         else Console.WriteLine("Invalid input");
                         break;
                     case "1": break; // book customer
-                    case "2": break; // seating availability
+                    case "2": // seating availability
+                        try
+                        {
+                            Console.WriteLine("Enter the screen you would like to see availability for: ");
+                            int screen = Convert.ToInt32(Console.ReadLine());
+                            CurrentCinema.DisplayScreen(screen);
+                        }
+                        break;
                     case "3":
                         Console.WriteLine("Enter screen number:");
                         try

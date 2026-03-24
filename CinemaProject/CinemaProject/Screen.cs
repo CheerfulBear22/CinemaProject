@@ -200,5 +200,17 @@ namespace CinemaProject
             c.SetVIP(VIP);
             c.SetOAP(OAP);
         }
+
+        public void DisplayScreen()
+        {
+            for (int r = 0; r < ROW; r++)
+            {
+                for (int c = 0; c < COL; c++)
+                {
+                    Console.Write(Seats[r,c]);
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }

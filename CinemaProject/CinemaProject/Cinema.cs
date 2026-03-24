@@ -39,7 +39,7 @@ namespace CinemaProject
             }
 
             //Loading screens into the screen array
-
+            Screens = new List<Screen>(NumScreens);
             for (int i = 0; i < NumScreens; i++)
             {
                 Screens.Add(new Screen(i + 1));
@@ -145,6 +145,11 @@ namespace CinemaProject
         public void AddCustomer(int screen, string name, int seat, bool OAP, bool VIP)
         {
             Screens[screen].AddCustomer(name, seat, OAP, VIP);
+        }
+
+        public void DisplayScreen(int screen)
+        {
+            Screens[screen - 1].DisplayScreen();
         }
     }
 }
