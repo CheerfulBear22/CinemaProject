@@ -113,7 +113,8 @@ namespace CinemaProject
 
                         // validation for the screen integer
                         int screen;
-                        while (true)
+                        bool runningScreen = true;
+                        while (runningScreen)
                         {
                             Console.Write("Enter the screen number: ");
                             string input = Console.ReadLine();
@@ -123,12 +124,13 @@ namespace CinemaProject
                                 return;
                             }
                             int.TryParse(input, out screen);
-                            break;
+                            runningScreen = false;
                         }
 
                         // validation for the name string
                         string name;
-                        while (true)
+                        bool runningName = true;
+                        while (runningName)
                         {
                             Console.Write("Enter the customer name: ");
                             name = Console.ReadLine();
@@ -137,12 +139,13 @@ namespace CinemaProject
                                 Console.WriteLine("Name cannot be null.");
                                 return;
                             }
-                            break;
+                            runningName = false;
                         }
 
                         // validation for the seat integer
                         int seat;
-                        while (true)
+                        bool runningSeat = true;
+                        while (runningSeat)
                         {
                             Console.Write("Enter the seat number: ");
                             string input = Console.ReadLine();
@@ -152,12 +155,13 @@ namespace CinemaProject
                                 return;
                             }
                             int.TryParse(input, out seat);
-                            break;
+                            runningSeat = false;
                         }
 
                         // validation for the OAP bool
                         bool OAP;
-                        while (true)
+                        bool runningOAP = true;
+                        while (runningOAP)
                         {
                             Console.Write("Does the customer qualify for OAP? (Y/N): ");
                             string input = Console.ReadLine().ToLower();
@@ -174,18 +178,19 @@ namespace CinemaProject
                             else if (input == "y")
                             {
                                 OAP = true;
-                                break;
+                                runningOAP = false;
                             }
                             else if (input == "n")
                             {
                                 OAP = false;
-                                break;
+                                runningOAP = false;
                             }
                         }
 
                         // validation for the VIP boolean
                         bool VIP;
-                        while (true)
+                        bool runningVIP = true;
+                        while (runningVIP)
                         {
                             Console.Write("Does the customer qualify for VIP? (Y/N): ");
                             string input = Console.ReadLine().ToLower();
@@ -202,12 +207,12 @@ namespace CinemaProject
                             else if (input == "y")
                             {
                                 VIP = true;
-                                break;
+                                runningVIP = false;
                             }
                             else if (input == "n")
                             {
                                 VIP = false;
-                                break;
+                                runningVIP = false;
                             }
                         }
 
