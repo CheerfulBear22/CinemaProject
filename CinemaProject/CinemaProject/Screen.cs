@@ -203,6 +203,7 @@ namespace CinemaProject
             if (Customers.Count == 0)
             {
                 Customers.Add(c);
+                return;
             }
             for (int i = 0; i < Customers.Count; i++)
             {
