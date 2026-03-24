@@ -65,7 +65,7 @@ namespace CinemaProject
             }
         }
 
-        public void GetCustomers()
+        public List<Customer> GetCustomers()
         {
             foreach (Screen screen in Screens)
             {
@@ -74,6 +74,7 @@ namespace CinemaProject
                     Customers.Add(c);
                 }
             }
+            return Customers;
         }
         
 

@@ -237,7 +237,10 @@ namespace CinemaProject
 
         public List<Customer> GetCustomers()
         {
-            return Customers;
+            foreach(Customer c in Customers)
+            {
+                return c;
+            }
         }
 
         public int GetRows()
