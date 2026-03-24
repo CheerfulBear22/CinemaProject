@@ -144,7 +144,7 @@ namespace CinemaProject
 
         public void AddCustomer(int screen, string name, int seat, bool OAP, bool VIP)
         {
-            Screens[screen].AddCustomer(name, seat, OAP, VIP);
+            Screens[screen - 1].AddCustomer(name, seat, OAP, VIP);
         }
 
         public void DisplayScreen(int screen)
