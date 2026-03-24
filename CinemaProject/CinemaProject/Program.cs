@@ -216,7 +216,7 @@ namespace CinemaProject
 
                         break; // book customer
 
-                    case "2": // seating availability
+                    case "2":
                         try
                         {
                             Console.WriteLine("Enter the screen you would like to see availability for: ");
@@ -227,7 +227,7 @@ namespace CinemaProject
                         {
                             Console.WriteLine("Error - Invalid input");
                         }
-                        break;
+                        break; // seating availability
 
                     case "3":
                         Console.WriteLine("Enter screen number:");
