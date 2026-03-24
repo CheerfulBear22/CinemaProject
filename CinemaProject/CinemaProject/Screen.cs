@@ -199,6 +199,22 @@ namespace CinemaProject
             c.SetSeat(seat);
             c.SetVIP(VIP);
             c.SetOAP(OAP);
+
+            if (Customers.Count == 0)
+            {
+                Customers.Add(c);
+                return;
+            }
+            for (int i = 0; i < Customers.Count; i++)
+            {
+                if (String.Compare(c.GetName(), Customers[i].GetName()) < 1)
+                {
+                    Customers.Insert(i, c);
+                    return;
+                }
+            }
+
+            Customers.Add(c);
         }
 
         public void DisplayScreen()
