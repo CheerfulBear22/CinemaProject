@@ -112,7 +112,7 @@ namespace CinemaProject
                         Console.WriteLine("BOOKING CUSTOMER:");
 
                         // validation for the screen integer
-                        int screen;
+                        int screen = 0;
                         bool runningScreen = true;
                         while (runningScreen)
                         {
@@ -128,7 +128,7 @@ namespace CinemaProject
                         }
 
                         // validation for the name string
-                        string name;
+                        string name = "";
                         bool runningName = true;
                         while (runningName)
                         {
@@ -143,7 +143,7 @@ namespace CinemaProject
                         }
 
                         // validation for the seat integer
-                        int seat;
+                        int seat = 0;
                         bool runningSeat = true;
                         while (runningSeat)
                         {
@@ -159,7 +159,7 @@ namespace CinemaProject
                         }
 
                         // validation for the OAP bool
-                        bool OAP;
+                        bool OAP = false;
                         bool runningOAP = true;
                         while (runningOAP)
                         {
@@ -188,7 +188,7 @@ namespace CinemaProject
                         }
 
                         // validation for the VIP boolean
-                        bool VIP;
+                        bool VIP = false;
                         bool runningVIP = true;
                         while (runningVIP)
                         {
