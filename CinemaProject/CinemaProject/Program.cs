@@ -53,6 +53,8 @@ namespace CinemaProject
                     Console.WriteLine("MANAGER'S OPTIONS:");
                     Console.WriteLine("+| Calculate Total Revenue"); // needs to collate at the total revenue for all screens
                     Console.WriteLine("#| Edit Film Schedule"); // managers
+                    Console.WriteLine("@| Add User");
+
                 }
                 Console.WriteLine("X| Exit");
                 Console.Write("Choice: ");
@@ -103,6 +105,10 @@ namespace CinemaProject
                         }
                         else Console.WriteLine("Invalid input");
                         break; // edit film schedule
+
+                    case "@":
+                        AddUser();
+                        break; // add user
 
                     case "1":
                         // clears the console so it looks neater before the inputs
@@ -248,7 +254,7 @@ namespace CinemaProject
                         break; // calculate revenue per screen
 
                     case "4":
-                        CurrentCinema.SaveCinema();
+                        Save();
                         break; // save everything
 
                     case "X": 
@@ -274,7 +280,7 @@ namespace CinemaProject
             bool valid = false;
             while (!valid)
             {
-                Console.WriteLine("Log in as user or manager? (u/m)");
+                Console.Write("Log in as user or manager? (u/m): ");
                 string userChoice = Console.ReadLine();
 
                 if (userChoice == "u")
@@ -300,9 +306,9 @@ namespace CinemaProject
 
             while(!LoggedIn && count < 3)
             {
-                Console.WriteLine("Enter username:");
+                Console.Write("Enter username: ");
                 string username = Console.ReadLine();
-                Console.WriteLine("Enter password:");
+                Console.Write("Enter password: ");
                 string password = Console.ReadLine();
                 string hashedPassword = SquareHash(password);
                 if (File.Exists(loginFile))
@@ -357,14 +363,8 @@ namespace CinemaProject
             return finalHash.ToString("X64");
         }
 
-
-        static void AddUser(User newUser)
+        static void AddUser()
         {
-            // probably adds the passed user to a list of users
-            // or saves them to a file
-            // or loads them to a file
-            // for David to do
-
             Console.Write("Enter the username: ");
             string userName = Console.ReadLine();
             Console.Write("Enter the password: ");
