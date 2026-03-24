@@ -57,6 +57,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="SaveData\users.txt" />
+    <Content Include="SaveData\managers.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
