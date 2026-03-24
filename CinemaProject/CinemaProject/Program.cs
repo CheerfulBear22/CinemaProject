@@ -72,6 +72,7 @@ namespace CinemaProject
                         }
                         else Console.WriteLine("Invalid input");
                         break;
+
                     case "#":// edit film schedule
                         if (CurrentUser.GetIsManager())
                         {
@@ -97,32 +98,149 @@ namespace CinemaProject
                         }
                         else Console.WriteLine("Invalid input");
                         break;
-                    case "1": break; // book customer
+
+                    case "1":
+                        // clears the console so it looks neater before the inputs
+                        Console.Clear();
+
+                        // titles the page so the user knows what they are doing
+                        Console.WriteLine("BOOKING CUSTOMER:");
+
+                        // validation for the screen integer
+                        int screen;
+                        while (true)
+                        {
+                            Console.Write("Enter the screen number: ");
+                            string input = Console.ReadLine();
+                            if (input != null || !int.TryParse(input, out screen))
+                            {
+                                Console.WriteLine("Enter a valid integer.");
+                                return;
+                            }
+                            int.TryParse(input, out screen);
+                            break;
+                        }
+
+                        // validation for the name string
+                        string name;
+                        while (true)
+                        {
+                            Console.Write("Enter the customer name: ");
+                            name = Console.ReadLine();
+                            if (name == null)
+                            {
+                                Console.WriteLine("Name cannot be null.");
+                                return;
+                            }
+                            break;
+                        }
+
+                        // validation for the seat integer
+                        int seat;
+                        while (true)
+                        {
+                            Console.Write("Enter the seat number: ");
+                            string input = Console.ReadLine();
+                            if (input != null || !int.TryParse(input, out seat))
+                            {
+                                Console.WriteLine("Enter a valid integer.");
+                                return;
+                            }
+                            int.TryParse(input, out seat);
+                            break;
+                        }
+
+                        // validation for the OAP bool
+                        bool OAP;
+                        while (true)
+                        {
+                            Console.Write("Does the customer qualify for OAP? (Y/N): ");
+                            string input = Console.ReadLine().ToLower();
+                            if (input == null)
+                            {
+                                Console.WriteLine("Input cannot be null.");
+                                return;
+                            }
+                            if (input != "y" || input != "n")
+                            {
+                                Console.WriteLine("Input invalid - enter Y or N");
+                                return;
+                            }
+                            else if (input == "y")
+                            {
+                                OAP = true;
+                                break;
+                            }
+                            else if (input == "n")
+                            {
+                                OAP = false;
+                                break;
+                            }
+                        }
+
+                        // validation for the VIP boolean
+                        bool VIP;
+                        while (true)
+                        {
+                            Console.Write("Does the customer qualify for VIP? (Y/N): ");
+                            string input = Console.ReadLine().ToLower();
+                            if (input == null)
+                            {
+                                Console.WriteLine("Input cannot be null.");
+                                return;
+                            }
+                            if (input != "y" || input != "n")
+                            {
+                                Console.WriteLine("Input invalid - enter Y or N");
+                                return;
+                            }
+                            else if (input == "y")
+                            {
+                                VIP = true;
+                                break;
+                            }
+                            else if (input == "n")
+                            {
+                                VIP = false;
+                                break;
+                            }
+                        }
+
+                        CurrentCinema.AddCustomer(screen, name, seat, OAP, VIP);
+                        // int screen, string name, int seat, bool OAP, bool VIP
+
+                        break; // book customer
+
                     case "2": // seating availability
                         try
                         {
                             Console.WriteLine("Enter the screen you would like to see availability for: ");
-                            int screen = Convert.ToInt32(Console.ReadLine());
-                            CurrentCinema.DisplayScreen(screen);
+                            int screen1 = Convert.ToInt32(Console.ReadLine());
+                            CurrentCinema.DisplayScreen(screen1);
                         }
                         catch
                         {
                             Console.WriteLine("Error - Invalid input");
                         }
                         break;
+
                     case "3":
                         Console.WriteLine("Enter screen number:");
                         try
                         {
                             int screenNum = Convert.ToInt32(Console.ReadLine());
                             Console.WriteLine($"The total revenue for screen number {screenNum} is £{CurrentCinema.CalculateScreenProfit(screenNum)}");
-                        } catch
+                        } 
+                        catch
                         {
                             Console.WriteLine("Invalid input");
                         }
                         break; // calculate revenue per screen
+
                     case "4": CurrentCinema.SaveCinema(); break; // save everything
+
                     case "X": Environment.Exit(0); break; // exit
+
                     default: Console.WriteLine("Invalid input"); break;
                 }
                 Console.WriteLine("Press any key to continue...");
