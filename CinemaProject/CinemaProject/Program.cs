@@ -125,7 +125,8 @@ namespace CinemaProject
                     case "X": Environment.Exit(0); break; // exit
                     default: Console.WriteLine("Invalid input"); break;
                 }
-
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
         }
 
