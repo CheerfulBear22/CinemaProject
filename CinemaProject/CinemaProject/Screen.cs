@@ -28,6 +28,7 @@ namespace CinemaProject
         {
             // create the Customers list when the screen object is instantiated
             Customers = new List<Customer>();
+            CustomerNames = new List<string>();
             ScreenNumber = sn;
             FileName = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName, "SaveData", $"screen{ScreenNumber}.txt");
             CustomerFileName = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName, "SaveData", $"screen{ScreenNumber}Customers.txt");
