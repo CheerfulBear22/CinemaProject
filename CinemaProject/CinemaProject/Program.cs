@@ -121,7 +121,7 @@ namespace CinemaProject
                             if (input == null || !int.TryParse(input, out screen))
                             {
                                 Console.WriteLine("Enter a valid integer.");
-                                return;
+                                continue;
                             }
                             int.TryParse(input, out screen);
                             runningScreen = false;
@@ -137,7 +137,7 @@ namespace CinemaProject
                             if (name == null)
                             {
                                 Console.WriteLine("Name cannot be null.");
-                                return;
+                                continue;
                             }
                             runningName = false;
                         }
@@ -152,7 +152,7 @@ namespace CinemaProject
                             if (input == null || !int.TryParse(input, out seat))
                             {
                                 Console.WriteLine("Enter a valid integer.");
-                                return;
+                                continue;
                             }
                             int.TryParse(input, out seat);
                             runningSeat = false;
@@ -168,12 +168,12 @@ namespace CinemaProject
                             if (input == null)
                             {
                                 Console.WriteLine("Input cannot be null.");
-                                return;
+                                continue;
                             }
                             if (input != "y" && input != "n")
                             {
                                 Console.WriteLine("Input invalid - enter Y or N");
-                                return;
+                                continue;
                             }
                             else if (input == "y")
                             {
@@ -197,12 +197,12 @@ namespace CinemaProject
                             if (input == null)
                             {
                                 Console.WriteLine("Input cannot be null.");
-                                return;
+                                continue;
                             }
                             if (input != "y" && input != "n")
                             {
                                 Console.WriteLine("Input invalid - enter Y or N");
-                                return;
+                                continue;
                             }
                             else if (input == "y")
                             {
