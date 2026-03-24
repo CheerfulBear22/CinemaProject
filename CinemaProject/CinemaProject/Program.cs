@@ -47,8 +47,6 @@ namespace CinemaProject
                 Console.WriteLine("2| Seating Availability"); // the function for this needs to ask for the screen that is required
                 Console.WriteLine("3| Calculate Revenue per Screen"); // the function for this needs to ask for the screen that is required
                 Console.WriteLine("4| Save Everything");
-                Console.WriteLine("X| Exit");
-
                 if (CurrentUser.GetIsManager())
                 {
                     Console.WriteLine();
@@ -56,24 +54,31 @@ namespace CinemaProject
                     Console.WriteLine("+| Calculate Total Revenue"); // needs to collate at the total revenue for all screens
                     Console.WriteLine("#| Edit Film Schedule"); // managers
                 }
+                Console.WriteLine("X| Exit");
+                Console.Write("Choice: ");
+
                 string choice = Console.ReadLine();
                 if (choice == null)
                 {
                     Console.WriteLine("Input cannot be null.");
                     return;
                 }
+                if (choice == "x")
+                {
+                    choice = "X";
+                }
 
                 switch(choice)
                 {
-                    case "+": // calculate total revenue
+                    case "+":
                         if (CurrentUser.GetIsManager())
                         {
                             Console.WriteLine($"Current total profit is {CurrentCinema.CalculateAllProfit()}");
                         }
                         else Console.WriteLine("Invalid input");
-                        break;
+                        break; // calculate total revenue
 
-                    case "#":// edit film schedule
+                    case "#":
                         if (CurrentUser.GetIsManager())
                         {
                             Console.WriteLine("Add or remove a film? (a/r)");
@@ -97,7 +102,7 @@ namespace CinemaProject
                             }
                         }
                         else Console.WriteLine("Invalid input");
-                        break;
+                        break; // edit film schedule
 
                     case "1":
                         // clears the console so it looks neater before the inputs
@@ -211,7 +216,7 @@ namespace CinemaProject
 
                         break; // book customer
 
-                    case "2": // seating availability
+                    case "2":
                         try
                         {
                             Console.WriteLine("Enter the screen you would like to see availability for: ");
@@ -222,7 +227,7 @@ namespace CinemaProject
                         {
                             Console.WriteLine("Error - Invalid input");
                         }
-                        break;
+                        break; // seating availability
 
                     case "3":
                         Console.WriteLine("Enter screen number:");
@@ -237,11 +242,17 @@ namespace CinemaProject
                         }
                         break; // calculate revenue per screen
 
-                    case "4": CurrentCinema.SaveCinema(); break; // save everything
+                    case "4":
+                        CurrentCinema.SaveCinema();
+                        break; // save everything
 
-                    case "X": Environment.Exit(0); break; // exit
+                    case "X": 
+                        Environment.Exit(0); 
+                        break; // exit
 
-                    default: Console.WriteLine("Invalid input"); break;
+                    default: 
+                        Console.WriteLine("Invalid input");
+                        break; // default error catch
                 }
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
