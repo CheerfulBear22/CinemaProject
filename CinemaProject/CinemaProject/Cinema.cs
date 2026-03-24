@@ -69,7 +69,10 @@ namespace CinemaProject
         {
             foreach (Screen screen in Screens)
             {
-                Customers.Add(screen.GetCustomers());
+                foreach (Customer c in screen.GetCustomers())
+                {
+                    Customers.Add(c);
+                }
             }
             return Customers;
         }
@@ -177,6 +180,11 @@ namespace CinemaProject
         public void DisplayScreen(int screen)
         {
             Screens[screen - 1].DisplayScreen();
+        }
+
+        public Screen GetScreen(int screen)
+        {
+            return Screens[screen];
         }
     }
 }

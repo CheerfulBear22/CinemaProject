@@ -250,5 +250,15 @@ namespace CinemaProject
                 return c;
             }
         }
+
+        public int GetRows()
+        {
+            return ROW;
+        }
+
+        public int GetColumns() 
+        { 
+            return COL; 
+        }
     }
 }

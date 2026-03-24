@@ -223,13 +223,13 @@ namespace CinemaProject
                         Console.WriteLine("BOOKING CUSTOMER:");
 
                         // validation for the screen integer
-                        int screen = 0;
+                        int screen = -1;
                         bool runningScreen = true;
                         while (runningScreen)
                         {
                             Console.Write("Enter the screen number: ");
                             string input = Console.ReadLine();
-                            if (input == null || !int.TryParse(input, out screen))
+                            if (input == null || !int.TryParse(input, out screen) || screen < 0 || screen > 5)
                             {
                                 Console.WriteLine("Enter a valid integer.");
                                 continue;
@@ -245,7 +245,7 @@ namespace CinemaProject
                         {
                             Console.Write("Enter the customer name: ");
                             name = Console.ReadLine();
-                            if (name == null)
+                            if (name.Length == 0)
                             {
                                 Console.WriteLine("Name cannot be null.");
                                 continue;
@@ -254,13 +254,14 @@ namespace CinemaProject
                         }
 
                         // validation for the seat integer
-                        int seat = 0;
+                        int seat = -1;
                         bool runningSeat = true;
+                        Screen seatScreen = CurrentCinema.GetScreen(screen);
                         while (runningSeat)
                         {
                             Console.Write("Enter the seat number: ");
                             string input = Console.ReadLine();
-                            if (input == null || !int.TryParse(input, out seat))
+                            if (input == null || !int.TryParse(input, out seat) || seat < 0 || seat >= (seatScreen.GetRows() * seatScreen.GetColumns()))
                             {
                                 Console.WriteLine("Enter a valid integer.");
                                 continue;
