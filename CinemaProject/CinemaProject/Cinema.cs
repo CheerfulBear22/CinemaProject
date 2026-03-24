@@ -166,5 +166,10 @@ namespace CinemaProject
         {
             Screens[screen - 1].DisplayScreen();
         }
+
+        public Screen GetScreen(int screen)
+        {
+            return Screens[screen];
+        }
     }
 }
