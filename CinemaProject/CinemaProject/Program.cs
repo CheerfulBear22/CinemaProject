@@ -124,7 +124,7 @@ namespace CinemaProject
                         {
                             Console.Write("Enter the screen number: ");
                             string input = Console.ReadLine();
-                            if (input == null || !int.TryParse(input, out screen))
+                            if (input == null || !int.TryParse(input, out screen) || screen < 1 || screen > 5)
                             {
                                 Console.WriteLine("Enter a valid integer.");
                                 continue;
