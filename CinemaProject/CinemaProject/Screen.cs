@@ -78,8 +78,8 @@ namespace CinemaProject
                         string[] line = sr.ReadLine().Split(',');
                         c.SetName(line[0]);
                         c.SetSeat(Convert.ToInt32(line[1]));
-                        c.SetOAP(line[2] == "true");
-                        c.SetVIP(line[3] == "true");
+                        c.SetOAP(line[2] == "True");
+                        c.SetVIP(line[3] == "True");
                         CustomerNames.Add(line[0]);
                     }
                 }
@@ -194,6 +194,11 @@ namespace CinemaProject
 
         public void AddCustomer(string name, int seat, bool OAP, bool VIP)
         {
+            int row = seat / ROW;
+            int col = seat % ROW;
+
+            Seats[row, col] = 'X';
+
             Customer c = new Customer();
             c.SetName(name);
             c.SetSeat(seat);
