@@ -265,7 +265,7 @@ namespace CinemaProject
         }
 
         static bool Login()
-        {
+        { 
             bool LoggedIn = false;
             bool ManagerLogin = false;
             string loginFile;
