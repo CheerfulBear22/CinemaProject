@@ -241,7 +241,32 @@ namespace CinemaProject
                         break; // seating availability
 
                     case "3":
+                        List<Customer> currentCustomers = CurrentCinema.GetCustomers();
 
+                        foreach (Customer c in currentCustomers)
+                        {
+                            // for loops make the boolean more readable for the user
+                            // states explicitly yes or no if they are OAP or VIP in the output with this
+                            if (c.GetOAP())
+                            {
+                                string OAP = "Yes";
+                            }
+                            else
+                            {
+                                OAP = "No";
+                            }
+
+                            if (c.GetVIP())
+                            {
+                                string VIP = "Yes";
+                            }
+                            else
+                            {
+                                VIP = "No";
+                            }
+
+                            Console.WriteLine($"Name: {c.GetName()} | Seat: {c.GetSeat()} | OAP: {OAP} | VIP: {VIP}");
+                        }
                         break; // view customers that are currently booked
 
                     case "4":
