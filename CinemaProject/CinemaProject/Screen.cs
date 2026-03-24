@@ -135,10 +135,18 @@ namespace CinemaProject
             return ScreenNumber;
         }
 
-        public void SetFilm(string film)
+        public int SetFilm(string film)
         {
             // setter for the next film
-            NextFilm = film;
+            try
+            {
+                NextFilm = film;
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
         }
 
         public string GetFilm()

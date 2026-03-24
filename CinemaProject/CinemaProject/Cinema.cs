@@ -110,7 +110,21 @@ namespace CinemaProject
             return true;
         }
 
-        private int FindFilm(string film)
+        public string GetNextFilm(int screenNum)
+        {
+            Screen screen = Screens[screenNum];
+            return screen.GetFilm();
+        }
+
+        // set next film
+        public int SetNextFilm(int screen, string name)
+        {
+            Screen screen = Screens[screen];
+            int result = screen.SetFilm(name);
+            return result;
+        }
+
+        public int FindFilm(string film)
         {
             // calls a binary search function to find the index of the film in the list
             return _BinarySearch(Films, film, 0, Films.Count);

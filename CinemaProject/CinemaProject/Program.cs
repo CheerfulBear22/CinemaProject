@@ -53,7 +53,7 @@ namespace CinemaProject
                     Console.WriteLine();
                     Console.WriteLine("MANAGER'S OPTIONS:");
                     Console.WriteLine("+| Calculate Total Revenue"); // needs to collate at the total revenue for all screens
-                    Console.WriteLine("#| Edit Film Schedule"); // managers
+                    Console.WriteLine("#| Edit Films for Screens"); // managers
                     Console.WriteLine("@| Add User");
                 }
                 Console.WriteLine("X| Exit");
@@ -83,14 +83,22 @@ namespace CinemaProject
                     case "#":
                         if (CurrentUser.GetIsManager())
                         {
-                            Console.WriteLine("Add or remove a film? (a/r)");
+                            Console.Clear();
+                            Console.WriteLine("EDIT FILM PER SCREEN");
+                            Console.WriteLine("Do you want to...? ");
+                            Console.WriteLine("a| Add a film");
+                            Console.WriteLine("b| Remove a film");
+                            Console.WriteLine("c| View next film");
+                            Console.WriteLine("d| Set next film");
+                            Console.WriteLine("e| Film finder");
                             switch (Console.ReadLine())
                             {
                                 case "a":
                                     Console.WriteLine("Enter film name: ");
                                     CurrentCinema.AddFilm(Console.ReadLine());
-                                    break;
-                                case "r":
+                                    break; // add a film
+
+                                case "b":
                                     Console.WriteLine("Enter film name: ");
                                     if (CurrentCinema.RemoveFilm(Console.ReadLine()))
                                     {
@@ -100,14 +108,111 @@ namespace CinemaProject
                                     {
                                         Console.WriteLine("Error: Film not found");
                                     }
+                                    break; // remove a film
+
+                                case "c":
+                                    int screen = 0;
+                                    bool runningScreen = true;
+                                    while (runningScreen)
+                                    {
+                                        Console.Write("Enter the screen number: ");
+                                        string input = Console.ReadLine();
+                                        if (input == null || !int.TryParse(input, out screen))
+                                        {
+                                            Console.WriteLine("Enter a valid integer.");
+                                            continue;
+                                        }
+                                        int.TryParse(input, out screen);
+                                        runningScreen = false;
+                                    }
+                                    string result = CurrentCinema.GetNextFilm(screen);
+
+                                    Console.WriteLine($"The next film to play on screen {screen} is: {result}");
+
+                                    break; // view next film
+
+                                case "d":
+                                    int screen = 0;
+                                    bool runningScreen = true;
+                                    while (runningScreen)
+                                    {
+                                        Console.Write("Enter the screen number: ");
+                                        string input = Console.ReadLine();
+                                        if (input == null || !int.TryParse(input, out screen))
+                                        {
+                                            Console.WriteLine("Enter a valid integer.");
+                                            continue;
+                                        }
+                                        int.TryParse(input, out screen);
+                                        runningScreen = false;
+                                    }
+
+                                    string name = "";
+                                    bool runningName = true;
+                                    while (runningName)
+                                    {
+                                        Console.Write("Enter the film name: ");
+                                        name = Console.ReadLine();
+                                        if (name == null)
+                                        {
+                                            Console.WriteLine("Name cannot be null.");
+                                            continue;
+                                        }
+                                        runningName = false;
+                                    }
+
+                                    int result = CurrentCinema.SetNextFilm(screen, name);
+
+                                    if (result == 1)
+                                    {
+                                        Console.WriteLine($"Next film set successfully for screen {screen}.");
+                                    }
+                                    else if (resilt == 0)
+                                    {
+                                        Console.WriteLine($"Error - next film for screen {screen} could not be set.");
+                                    }
+                                    break; // set next film
+
+                                case "e":
+                                    string name = "";
+                                    bool runningName = true;
+                                    while (runningName)
+                                    {
+                                        Console.Write("Enter the film name: ");
+                                        name = Console.ReadLine();
+                                        if (name == null)
+                                        {
+                                            Console.WriteLine("Name cannot be null.");
+                                            continue;
+                                        }
+                                        runningName = false;
+                                    }
+
+                                    int result = CurrentCinema.FindFilm(name);
+
+                                    if (result == -1)
+                                    {
+                                        Console.WriteLine("The list of films is empty");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine($"{name} was found in the list of films at index {result}.");
+                                    }
+
+                                    break; // film finder
+
+                                default:
+                                    Console.WriteLine("Invalid input");
                                     break;
                             }
                         }
-                        else Console.WriteLine("Invalid input");
                         break; // edit film schedule
 
                     case "@":
-                        AddUser();
+                        if (CurrentUser.GetIsManager())
+                        {
+                            AddUser();
+                        }
                         break; // add user
 
                     case "1":
@@ -243,7 +348,7 @@ namespace CinemaProject
                     case "3":
                         Console.Clear();
                         List<Customer> currentCustomers = CurrentCinema.GetCustomers();
-
+                        Console.WriteLine("VIEW CURRENT CUSTOMERS: ");
                         foreach (Customer c in currentCustomers)
                         {
                             // for loops make the boolean more readable for the user
