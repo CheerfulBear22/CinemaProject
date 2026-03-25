@@ -161,9 +161,14 @@ namespace CinemaProject
                                             {
                                                 Console.Write("Enter the film name: ");
                                                 name = Console.ReadLine();
-                                                if (name == null)
+                                                if (name.Length == 0)
                                                 {
                                                     Console.WriteLine("Name cannot be null.");
+                                                    continue;
+                                                }
+                                                if (CurrentCinema.FindFilm(name) == -1)
+                                                {
+                                                    Console.WriteLine("Film not found in the list of films. Double check the film has been added");
                                                     continue;
                                                 }
                                                 runningName = false;
@@ -189,7 +194,7 @@ namespace CinemaProject
                                             {
                                                 Console.Write("Enter the film name: ");
                                                 name = Console.ReadLine();
-                                                if (name == null)
+                                                if (name.Length == 0)
                                                 {
                                                     Console.WriteLine("Name cannot be null.");
                                                     continue;
