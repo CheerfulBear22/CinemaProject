@@ -120,9 +120,9 @@ namespace CinemaProject
         }
 
         // set next film
-        public int SetNextFilm(int screen, string name)
+        public int SetNextFilm(int screenNum, string name)
         {
-            Screen screen = Screens[screen];
+            Screen screen = Screens[screenNum];
             int result = screen.SetFilm(name);
             return result;
         }

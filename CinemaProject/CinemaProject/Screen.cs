@@ -82,6 +82,7 @@ namespace CinemaProject
                         c.SetOAP(line[2] == "True");
                         c.SetVIP(line[3] == "True");
                         CustomerNames.Add(line[0]);
+                        Customers.Add(c);
                     }
                 }
             }
@@ -245,10 +246,7 @@ namespace CinemaProject
 
         public List<Customer> GetCustomers()
         {
-            foreach(Customer c in Customers)
-            {
-                return c;
-            }
+            return Customers;
         }
 
         public int GetRows()
