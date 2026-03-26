@@ -20,7 +20,6 @@ namespace CinemaProject
         {
             // immediately loads the cinema from file when the cinema object is instantiated
             LoadCinema();
-            Films = new List<string>();
             Customers = new List<Customer>();
         }
 
@@ -130,7 +129,7 @@ namespace CinemaProject
         public int FindFilm(string film)
         {
             // calls a binary search function to find the index of the film in the list
-            return _BinarySearch(Films, film, 0, Films.Count);
+            return _BinarySearch(Films, film, 0, Films.Count - 1);
         }
 
         private int _BinarySearch(List<string> data, string value, int left, int right)
