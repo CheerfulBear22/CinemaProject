@@ -12,6 +12,7 @@ namespace CinemaProject
     {
         List<string> Films = new List<string>();
         List<Screen> Screens;
+        List<Customer> Customers;
         private string FilmsFilePath = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName, "SaveData", "Films.txt");
         private int NumScreens = 5;
 
@@ -20,6 +21,7 @@ namespace CinemaProject
             // immediately loads the cinema from file when the cinema object is instantiated
             LoadCinema();
             Films = new List<string>();
+            Customers = new List<Customer>();
         }
 
         public void LoadCinema()
@@ -63,10 +65,23 @@ namespace CinemaProject
             }
         }
 
+        public List<Customer> GetCustomers()
+        {
+            foreach (Screen screen in Screens)
+            {
+                foreach (Customer c in screen.GetCustomers())
+                {
+                    Customers.Add(c);
+                }
+            }
+            return Customers;
+        }
+        
 
         /*
          * FILM MANAGEMENT
          */
+
         public void AddFilm(string film)
         {
             //Adding a film to the list in alphabetical order
@@ -98,7 +113,21 @@ namespace CinemaProject
             return true;
         }
 
-        private int FindFilm(string film)
+        public string GetNextFilm(int screenNum)
+        {
+            Screen screen = Screens[screenNum];
+            return screen.GetFilm();
+        }
+
+        // set next film
+        public int SetNextFilm(int screenNum, string name)
+        {
+            Screen screen = Screens[screenNum];
+            int result = screen.SetFilm(name);
+            return result;
+        }
+
+        public int FindFilm(string film)
         {
             // calls a binary search function to find the index of the film in the list
             return _BinarySearch(Films, film, 0, Films.Count);
@@ -127,6 +156,7 @@ namespace CinemaProject
                 return mid;
             }
         }
+
         public decimal CalculateAllProfit()
         {
             decimal profit = 0;
@@ -150,6 +180,11 @@ namespace CinemaProject
         public void DisplayScreen(int screen)
         {
             Screens[screen - 1].DisplayScreen();
+        }
+
+        public Screen GetScreen(int screen)
+        {
+            return Screens[screen];
         }
     }
 }

@@ -45,14 +45,16 @@ namespace CinemaProject
                 Console.WriteLine("ENTER YOUR OPTIONS:");
                 Console.WriteLine("1| Book Customer"); // this is definitely for employees
                 Console.WriteLine("2| Seating Availability"); // the function for this needs to ask for the screen that is required
-                Console.WriteLine("3| Calculate Revenue per Screen"); // the function for this needs to ask for the screen that is required
-                Console.WriteLine("4| Save Everything");
+                Console.WriteLine("3| View Current Customers"); // needs to be done //////////////////////////////////////////////////////////////////////////////////////////////////////
+                Console.WriteLine("4| Calculate Revenue per Screen"); // the function for this needs to ask for the screen that is required
+                Console.WriteLine("5| Save Everything");
                 if (CurrentUser.GetIsManager())
                 {
                     Console.WriteLine();
                     Console.WriteLine("MANAGER'S OPTIONS:");
                     Console.WriteLine("+| Calculate Total Revenue"); // needs to collate at the total revenue for all screens
-                    Console.WriteLine("#| Edit Film Schedule"); // managers
+                    Console.WriteLine("#| Edit Films for Screens"); // managers
+                    Console.WriteLine("@| Add User");
                 }
                 Console.WriteLine("X| Exit");
                 Console.Write("Choice: ");
@@ -71,184 +73,347 @@ namespace CinemaProject
                 switch(choice)
                 {
                     case "+":
-                        if (CurrentUser.GetIsManager())
                         {
-                            Console.WriteLine($"Current total profit is {CurrentCinema.CalculateAllProfit()}");
+                            if (CurrentUser.GetIsManager())
+                            {
+                                Console.WriteLine($"Current total profit is {CurrentCinema.CalculateAllProfit()}");
+                            }
+                            else Console.WriteLine("Invalid input");
+                            break; // calculate total revenue
                         }
-                        else Console.WriteLine("Invalid input");
-                        break; // calculate total revenue
 
                     case "#":
-                        if (CurrentUser.GetIsManager())
                         {
-                            Console.WriteLine("Add or remove a film? (a/r)");
-                            switch (Console.ReadLine())
+                            if (CurrentUser.GetIsManager())
                             {
-                                case "a":
-                                    Console.WriteLine("Enter film name: ");
-                                    CurrentCinema.AddFilm(Console.ReadLine());
-                                    break;
-                                case "r":
-                                    Console.WriteLine("Enter film name: ");
-                                    if (CurrentCinema.RemoveFilm(Console.ReadLine()))
-                                    {
-                                        Console.WriteLine("Film removed");
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Error: Film not found");
-                                    }
-                                    break;
-                            }
-                        }
-                        else Console.WriteLine("Invalid input");
-                        break; // edit film schedule
+                                Console.Clear();
+                                Console.WriteLine("EDIT FILM PER SCREEN");
+                                Console.WriteLine("Do you want to...? ");
+                                Console.WriteLine("a| Add a film");
+                                Console.WriteLine("b| Remove a film");
+                                Console.WriteLine("c| View next film");
+                                Console.WriteLine("d| Set next film");
+                                Console.WriteLine("e| Film finder");
+                                switch (Console.ReadLine())
+                                {
+                                    case "a":
+                                        {
+                                            Console.WriteLine("Enter film name: ");
+                                            CurrentCinema.AddFilm(Console.ReadLine());
+                                            break; // add a film
+                                        }
 
+                                    case "b":
+                                        {
+                                            Console.WriteLine("Enter film name: ");
+                                            if (CurrentCinema.RemoveFilm(Console.ReadLine()))
+                                            {
+                                                Console.WriteLine("Film removed");
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Error: Film not found");
+                                            }
+                                            break; // remove a film
+                                        }
+                                    case "c":
+                                        {
+                                            int screen = 0;
+                                            bool runningScreen = true;
+                                            while (runningScreen)
+                                            {
+                                                Console.Write("Enter the screen number: ");
+                                                string input = Console.ReadLine();
+                                                if (input == null || !int.TryParse(input, out screen))
+                                                {
+                                                    Console.WriteLine("Enter a valid integer.");
+                                                    continue;
+                                                }
+                                                int.TryParse(input, out screen);
+                                                runningScreen = false;
+                                            }
+                                            string result = CurrentCinema.GetNextFilm(screen);
+
+                                            Console.WriteLine($"The next film to play on screen {screen} is: {result}");
+
+                                            break; // view next film
+                                        }
+                                    case "d":
+                                        {
+                                            int screen = 0;
+                                            bool runningScreen = true;
+                                            while (runningScreen)
+                                            {
+                                                Console.Write("Enter the screen number: ");
+                                                string input = Console.ReadLine();
+                                                if (input == null || !int.TryParse(input, out screen))
+                                                {
+                                                    Console.WriteLine("Enter a valid integer.");
+                                                    continue;
+                                                }
+                                                int.TryParse(input, out screen);
+                                                runningScreen = false;
+                                            }
+
+                                            string name = "";
+                                            bool runningName = true;
+                                            while (runningName)
+                                            {
+                                                Console.Write("Enter the film name: ");
+                                                name = Console.ReadLine();
+                                                if (name.Length == 0)
+                                                {
+                                                    Console.WriteLine("Name cannot be null.");
+                                                    continue;
+                                                }
+                                                if (CurrentCinema.FindFilm(name) == -1)
+                                                {
+                                                    Console.WriteLine("Film not found in the list of films. Double check the film has been added");
+                                                    continue;
+                                                }
+                                                runningName = false;
+                                            }
+
+                                            int result = CurrentCinema.SetNextFilm(screen, name);
+
+                                            if (result == 1)
+                                            {
+                                                Console.WriteLine($"Next film set successfully for screen {screen}.");
+                                            }
+                                            else if (result == 0)
+                                            {
+                                                Console.WriteLine($"Error - next film for screen {screen} could not be set.");
+                                            }
+                                            break; // set next film
+                                        }
+                                    case "e":
+                                        {
+                                            string name = "";
+                                            bool runningName = true;
+                                            while (runningName)
+                                            {
+                                                Console.Write("Enter the film name: ");
+                                                name = Console.ReadLine();
+                                                if (name.Length == 0)
+                                                {
+                                                    Console.WriteLine("Name cannot be null.");
+                                                    continue;
+                                                }
+                                                runningName = false;
+                                            }
+
+                                            int result = CurrentCinema.FindFilm(name);
+
+                                            if (result == -1)
+                                            {
+                                                Console.WriteLine("The list of films is empty");
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine($"{name} was found in the list of films at index {result}.");
+                                            }
+
+                                            break; // film finder
+                                        }
+                                    default:
+                                        Console.WriteLine("Invalid input");
+                                        break;
+                                }
+                            }
+                            break; // edit film schedule
+                        }
+                    case "@":
+                        {
+                            if (CurrentUser.GetIsManager())
+                            {
+                                AddUser();
+                            }
+                            break; // add user
+                        }
                     case "1":
-                        // clears the console so it looks neater before the inputs
-                        Console.Clear();
-
-                        // titles the page so the user knows what they are doing
-                        Console.WriteLine("BOOKING CUSTOMER:");
-
-                        // validation for the screen integer
-                        int screen = 0;
-                        bool runningScreen = true;
-                        while (runningScreen)
                         {
-                            Console.Write("Enter the screen number: ");
-                            string input = Console.ReadLine();
-                            if (input == null || !int.TryParse(input, out screen))
+                            // clears the console so it looks neater before the inputs
+                            Console.Clear();
+
+                            // titles the page so the user knows what they are doing
+                            Console.WriteLine("BOOKING CUSTOMER:");
+
+                            // validation for the screen integer
+                            int screen = -1;
+                            bool runningScreen = true;
+                            while (runningScreen)
                             {
-                                Console.WriteLine("Enter a valid integer.");
-                                return;
+                                Console.Write("Enter the screen number: ");
+                                string input = Console.ReadLine();
+                                if (input == null || !int.TryParse(input, out screen) || screen < 0 || screen > 5)
+                                {
+                                    Console.WriteLine("Enter a valid integer.");
+                                    continue;
+                                }
+                                int.TryParse(input, out screen);
+                                runningScreen = false;
                             }
-                            int.TryParse(input, out screen);
-                            runningScreen = false;
+
+                            // validation for the name string
+                            string name = "";
+                            bool runningName = true;
+                            while (runningName)
+                            {
+                                Console.Write("Enter the customer name: ");
+                                name = Console.ReadLine();
+                                if (name.Length == 0)
+                                {
+                                    Console.WriteLine("Name cannot be null.");
+                                    continue;
+                                }
+                                runningName = false;
+                            }
+
+                            // validation for the seat integer
+                            int seat = -1;
+                            bool runningSeat = true;
+                            Screen seatScreen = CurrentCinema.GetScreen(screen);
+                            while (runningSeat)
+                            {
+                                Console.Write("Enter the seat number: ");
+                                string input = Console.ReadLine();
+                                if (input == null || !int.TryParse(input, out seat) || seat < 0 || seat >= (seatScreen.GetRows() * seatScreen.GetColumns()))
+                                {
+                                    Console.WriteLine("Enter a valid integer.");
+                                    continue;
+                                }
+                                int.TryParse(input, out seat);
+                                runningSeat = false;
+                            }
+
+                            // validation for the OAP bool
+                            bool OAP = false;
+                            bool runningOAP = true;
+                            while (runningOAP)
+                            {
+                                Console.Write("Does the customer qualify for OAP? (Y/N): ");
+                                string input = Console.ReadLine().ToLower();
+                                if (input == null)
+                                {
+                                    Console.WriteLine("Input cannot be null.");
+                                    continue;
+                                }
+                                if (input != "y" && input != "n")
+                                {
+                                    Console.WriteLine("Input invalid - enter Y or N");
+                                    continue;
+                                }
+                                else if (input == "y")
+                                {
+                                    OAP = true;
+                                    runningOAP = false;
+                                }
+                                else if (input == "n")
+                                {
+                                    OAP = false;
+                                    runningOAP = false;
+                                }
+                            }
+
+                            // validation for the VIP boolean
+                            bool VIP = false;
+                            bool runningVIP = true;
+                            while (runningVIP)
+                            {
+                                Console.Write("Does the customer qualify for VIP? (Y/N): ");
+                                string input = Console.ReadLine().ToLower();
+                                if (input == null)
+                                {
+                                    Console.WriteLine("Input cannot be null.");
+                                    continue;
+                                }
+                                if (input != "y" && input != "n")
+                                {
+                                    Console.WriteLine("Input invalid - enter Y or N");
+                                    continue;
+                                }
+                                else if (input == "y")
+                                {
+                                    VIP = true;
+                                    runningVIP = false;
+                                }
+                                else if (input == "n")
+                                {
+                                    VIP = false;
+                                    runningVIP = false;
+                                }
+                            }
+
+                            CurrentCinema.AddCustomer(screen, name, seat, OAP, VIP);
+                            // int screen, string name, int seat, bool OAP, bool VIP
+
+                            break; // book customer
                         }
-
-                        // validation for the name string
-                        string name = "";
-                        bool runningName = true;
-                        while (runningName)
-                        {
-                            Console.Write("Enter the customer name: ");
-                            name = Console.ReadLine();
-                            if (name == null)
-                            {
-                                Console.WriteLine("Name cannot be null.");
-                                return;
-                            }
-                            runningName = false;
-                        }
-
-                        // validation for the seat integer
-                        int seat = 0;
-                        bool runningSeat = true;
-                        while (runningSeat)
-                        {
-                            Console.Write("Enter the seat number: ");
-                            string input = Console.ReadLine();
-                            if (input == null || !int.TryParse(input, out seat))
-                            {
-                                Console.WriteLine("Enter a valid integer.");
-                                return;
-                            }
-                            int.TryParse(input, out seat);
-                            runningSeat = false;
-                        }
-
-                        // validation for the OAP bool
-                        bool OAP = false;
-                        bool runningOAP = true;
-                        while (runningOAP)
-                        {
-                            Console.Write("Does the customer qualify for OAP? (Y/N): ");
-                            string input = Console.ReadLine().ToLower();
-                            if (input == null)
-                            {
-                                Console.WriteLine("Input cannot be null.");
-                                return;
-                            }
-                            if (input != "y" && input != "n")
-                            {
-                                Console.WriteLine("Input invalid - enter Y or N");
-                                return;
-                            }
-                            else if (input == "y")
-                            {
-                                OAP = true;
-                                runningOAP = false;
-                            }
-                            else if (input == "n")
-                            {
-                                OAP = false;
-                                runningOAP = false;
-                            }
-                        }
-
-                        // validation for the VIP boolean
-                        bool VIP = false;
-                        bool runningVIP = true;
-                        while (runningVIP)
-                        {
-                            Console.Write("Does the customer qualify for VIP? (Y/N): ");
-                            string input = Console.ReadLine().ToLower();
-                            if (input == null)
-                            {
-                                Console.WriteLine("Input cannot be null.");
-                                return;
-                            }
-                            if (input != "y" && input != "n")
-                            {
-                                Console.WriteLine("Input invalid - enter Y or N");
-                                return;
-                            }
-                            else if (input == "y")
-                            {
-                                VIP = true;
-                                runningVIP = false;
-                            }
-                            else if (input == "n")
-                            {
-                                VIP = false;
-                                runningVIP = false;
-                            }
-                        }
-
-                        CurrentCinema.AddCustomer(screen, name, seat, OAP, VIP);
-                        // int screen, string name, int seat, bool OAP, bool VIP
-
-                        break; // book customer
-
                     case "2":
-                        try
                         {
-                            Console.WriteLine("Enter the screen you would like to see availability for: ");
-                            int screen1 = Convert.ToInt32(Console.ReadLine());
-                            CurrentCinema.DisplayScreen(screen1);
+                            try
+                            {
+                                Console.WriteLine("Enter the screen you would like to see availability for: ");
+                                int screen1 = Convert.ToInt32(Console.ReadLine());
+                                CurrentCinema.DisplayScreen(screen1);
+                            }
+                            catch
+                            {
+                                Console.WriteLine("Error - Invalid input");
+                            }
+                            break; // seating availability
                         }
-                        catch
-                        {
-                            Console.WriteLine("Error - Invalid input");
-                        }
-                        break; // seating availability
-
                     case "3":
-                        Console.WriteLine("Enter screen number:");
-                        try
                         {
-                            int screenNum = Convert.ToInt32(Console.ReadLine());
-                            Console.WriteLine($"The total revenue for screen number {screenNum} is £{CurrentCinema.CalculateScreenProfit(screenNum)}");
-                        } 
-                        catch
-                        {
-                            Console.WriteLine("Invalid input");
-                        }
-                        break; // calculate revenue per screen
+                            string OAP;
+                            string VIP;
+                            Console.Clear();
+                            List<Customer> currentCustomers = CurrentCinema.GetCustomers();
+                            Console.WriteLine("VIEW CURRENT CUSTOMERS: ");
+                            foreach (Customer c in currentCustomers)
+                            {
+                                // for loops make the boolean more readable for the user
+                                // states explicitly yes or no if they are OAP or VIP in the output with this
+                                if (c.GetOAP())
+                                {
+                                    OAP = "Yes";
+                                }
+                                else
+                                {
+                                    OAP = "No";
+                                }
 
+                                if (c.GetVIP())
+                                {
+                                    VIP = "Yes";
+                                }
+                                else
+                                {
+                                    VIP = "No";
+                                }
+
+                                Console.WriteLine($"Name: {c.GetName()} | Seat: {c.GetSeat()} | OAP: {OAP} | VIP: {VIP}");
+                            }
+                            Console.WriteLine("Press any key to exit...");
+                            Console.ReadKey();
+                            break; // view customers that are currently booked
+                        }
                     case "4":
-                        CurrentCinema.SaveCinema();
+                        {
+                            Console.WriteLine("Enter screen number:");
+                            try
+                            {
+                                int screenNum = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine($"The total revenue for screen number {screenNum} is £{CurrentCinema.CalculateScreenProfit(screenNum)}");
+                            }
+                            catch
+                            {
+                                Console.WriteLine("Invalid input");
+                            }
+                            break; // calculate revenue per screen
+                        }
+                    case "5":
+                        Save();
                         break; // save everything
 
                     case "X": 
@@ -274,7 +439,7 @@ namespace CinemaProject
             bool valid = false;
             while (!valid)
             {
-                Console.WriteLine("Log in as user or manager? (u/m)");
+                Console.Write("Log in as user or manager? (u/m): ");
                 string userChoice = Console.ReadLine();
 
                 if (userChoice == "u")
@@ -300,9 +465,9 @@ namespace CinemaProject
 
             while(!LoggedIn && count < 3)
             {
-                Console.WriteLine("Enter username:");
+                Console.Write("Enter username: ");
                 string username = Console.ReadLine();
-                Console.WriteLine("Enter password:");
+                Console.Write("Enter password: ");
                 string password = Console.ReadLine();
                 string hashedPassword = SquareHash(password);
                 if (File.Exists(loginFile))
@@ -357,14 +522,8 @@ namespace CinemaProject
             return finalHash.ToString("X64");
         }
 
-
-        static void AddUser(User newUser)
+        static void AddUser()
         {
-            // probably adds the passed user to a list of users
-            // or saves them to a file
-            // or loads them to a file
-            // for David to do
-
             Console.Write("Enter the username: ");
             string userName = Console.ReadLine();
             Console.Write("Enter the password: ");

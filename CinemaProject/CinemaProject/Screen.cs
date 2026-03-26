@@ -28,6 +28,7 @@ namespace CinemaProject
         {
             // create the Customers list when the screen object is instantiated
             Customers = new List<Customer>();
+            CustomerNames = new List<string>();
             ScreenNumber = sn;
             FileName = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName, "SaveData", $"screen{ScreenNumber}.txt");
             CustomerFileName = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName, "SaveData", $"screen{ScreenNumber}Customers.txt");
@@ -78,9 +79,10 @@ namespace CinemaProject
                         string[] line = sr.ReadLine().Split(',');
                         c.SetName(line[0]);
                         c.SetSeat(Convert.ToInt32(line[1]));
-                        c.SetOAP(line[2] == "true");
-                        c.SetVIP(line[3] == "true");
+                        c.SetOAP(line[2] == "True");
+                        c.SetVIP(line[3] == "True");
                         CustomerNames.Add(line[0]);
+                        Customers.Add(c);
                     }
                 }
             }
@@ -134,10 +136,18 @@ namespace CinemaProject
             return ScreenNumber;
         }
 
-        public void SetFilm(string film)
+        public int SetFilm(string film)
         {
             // setter for the next film
-            NextFilm = film;
+            try
+            {
+                NextFilm = film;
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
         }
 
         public string GetFilm()
@@ -194,6 +204,11 @@ namespace CinemaProject
 
         public void AddCustomer(string name, int seat, bool OAP, bool VIP)
         {
+            int row = seat / ROW;
+            int col = seat % ROW;
+
+            Seats[row, col] = 'X';
+
             Customer c = new Customer();
             c.SetName(name);
             c.SetSeat(seat);
@@ -227,6 +242,21 @@ namespace CinemaProject
                 }
                 Console.WriteLine();
             }
+        }
+
+        public List<Customer> GetCustomers()
+        {
+            return Customers;
+        }
+
+        public int GetRows()
+        {
+            return ROW;
+        }
+
+        public int GetColumns() 
+        { 
+            return COL; 
         }
     }
 }
