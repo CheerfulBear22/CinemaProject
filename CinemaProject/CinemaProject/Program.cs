@@ -94,12 +94,17 @@ namespace CinemaProject
                                 Console.WriteLine("c| View next film");
                                 Console.WriteLine("d| Set next film");
                                 Console.WriteLine("e| Film finder");
+                                Console.WriteLine("f| See all films");
                                 switch (Console.ReadLine())
                                 {
                                     case "a":
                                         {
                                             Console.WriteLine("Enter film name: ");
-                                            CurrentCinema.AddFilm(Console.ReadLine());
+                                            string f = Console.ReadLine();
+                                            if (f.Length != 0)
+                                                CurrentCinema.AddFilm(f);
+                                            else
+                                                Console.WriteLine("Error - please enter a film");
                                             break; // add a film
                                         }
 
@@ -215,11 +220,18 @@ namespace CinemaProject
 
                                             break; // film finder
                                         }
+                                    case "f":
+                                        foreach (string f in CurrentCinema.GetFilms())
+                                        {
+                                            Console.WriteLine(f);
+                                        }
+                                        break;
                                     default:
                                         Console.WriteLine("Invalid input");
                                         break;
                                 }
                             }
+                            else Console.WriteLine("Invalid input");
                             break; // edit film schedule
                         }
                     case "@":

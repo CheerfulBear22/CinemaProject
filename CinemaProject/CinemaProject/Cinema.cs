@@ -81,6 +81,11 @@ namespace CinemaProject
          * FILM MANAGEMENT
          */
 
+        public List<string> GetFilms()
+        {
+           return Films;
+        }
+
         public void AddFilm(string film)
         {
             //Adding a film to the list in alphabetical order
